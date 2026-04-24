@@ -1,0 +1,36 @@
+{
+  "name": "osaka-car-cleaning-lp",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build && node scripts/copy-coating.js && node scripts/prepare-xserver.js",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "dependencies": {
+    "@hookform/resolvers": "^5.2.2",
+    "clsx": "^2.1.0",
+    "framer-motion": "^10.0.0",
+    "lucide-react": "^0.300.0",
+    "next": "^16.1.1-canary.32",
+    "nodemailer": "^7.0.12",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-hook-form": "^7.71.1",
+    "tailwind-merge": "^2.2.0",
+    "zod": "^4.3.5"
+  },
+  "devDependencies": {
+    "@types/node": "^20",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.1.0",
+    "postcss": "^8",
+    "sharp": "^0.34.5",
+    "tailwindcss": "^3.3.0",
+    "typescript": "^5"
+  }
+}

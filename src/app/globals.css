@@ -1,0 +1,38 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --foreground-rgb: 0, 0, 0;
+  --background-start-rgb: 214, 219, 220;
+  --background-end-rgb: 255, 255, 255;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --foreground-rgb: 255, 255, 255;
+    --background-start-rgb: 0, 0, 0;
+    --background-end-rgb: 0, 0, 0;
+  }
+}
+
+body {
+  color: rgb(var(--foreground-rgb));
+  background: linear-gradient(to bottom,
+      transparent,
+      rgb(var(--background-end-rgb))) rgb(var(--background-start-rgb));
+}
+
+@layer utilities {
+  .mobile-text {
+    text-align: justify;
+    text-justify: inter-character;
+    /* Distributes space between chars for cleaner Japanese justification */
+    line-break: strict;
+    /* Strict kinsoku rules (e.g. no punctuation at start of line) */
+    overflow-wrap: break-word;
+    /* Prevents overflow */
+    word-break: normal;
+    /* "break-all" can violate kinsoku, "normal" respects it better with CJK */
+  }
+}

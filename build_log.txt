@@ -1,0 +1,44 @@
+
+> osaka-car-cleaning-lp@0.1.0 build
+> next build && node scripts/copy-coating.js
+
+笆ｲ Next.js 16.1.1-canary.32 (Turbopack)
+
+  Creating an optimized production build ...
+笨・Compiled successfully in 52s
+  Running TypeScript ...
+  Finished TypeScript in 19.8s ...
+  Collecting page data using 7 workers ...
+  Generating static pages using 7 workers (0/20) ...
+  Generating static pages using 7 workers (5/20) 
+  Generating static pages using 7 workers (10/20) 
+  Generating static pages using 7 workers (15/20) 
+笨・Generating static pages using 7 workers (20/20) in 9.6s
+  Finalizing page optimization ...
+
+Route (app)
+笏・笳・/
+笏・笳・/_not-found
+笏・笳・/regions/aichi
+笏・笳・/regions/chiba
+笏・笳・/regions/fukuoka
+笏・笳・/regions/hyogo
+笏・笳・/regions/ibaraki
+笏・笳・/regions/kanagawa
+笏・笳・/regions/kumamoto
+笏・笳・/regions/kyoto
+笏・笳・/regions/miyagi
+笏・笳・/regions/okinawa
+笏・笳・/regions/osaka
+笏・笳・/regions/saitama
+笏・笳・/regions/shiga
+笏・笳・/regions/tochigi
+笏・笳・/regions/tokyo
+笏・笳・/robots.txt
+笏・笳・/sitemap.xml
+
+
+笳・ (Static)  prerendered as static content
+
+Copying coating LP directory to out...
+Success: Copied to G:\繝槭う繝峨Λ繧､繝暴霆雁・謗・勁\antiLP\260116\out\coating
