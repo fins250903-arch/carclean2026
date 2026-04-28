@@ -29,9 +29,18 @@ export default function JsonLd({ regionName, path, niche = 'car', data, regionOv
         jsonLdArray.push(...(Array.isArray(data) ? data : [data]));
     }
 
+    // AI Overview向けにネストされた @context を削除し純粋な @graph 構造にする
+    const cleanedGraph = jsonLdArray.map(item => {
+        if (typeof item === 'object' && item !== null) {
+            const { '@context': _, ...rest } = item;
+            return rest;
+        }
+        return item;
+    });
+
     const schemaObj = {
         "@context": "https://schema.org",
-        "@graph": jsonLdArray
+        "@graph": cleanedGraph
     };
 
     return (

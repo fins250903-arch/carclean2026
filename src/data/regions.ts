@@ -1,0 +1,22 @@
+export const regions = [
+  { id: 'aichi', name: '愛知県' },
+  { id: 'okinawa', name: '沖縄県' },
+  { id: 'fukuoka', name: '福岡県' },
+  { id: 'hyogo', name: '兵庫県' },
+  { id: 'ibaraki', name: '茨城県' },
+  { id: 'chiba', name: '千葉県' },
+  { id: 'saitama', name: '埼玉県' },
+  { id: 'kanagawa', name: '神奈川県' },
+  { id: 'shiga', name: '滋賀県' },
+  { id: 'kumamoto', name: '熊本県' },
+  { id: 'miyagi', name: '宮城県' },
+  { id: 'tochigi', name: '栃木県' },
+  { id: 'kyoto', name: '京都府' },
+  { id: 'tokyo', name: '東京都' },
+  { id: 'osaka', name: '大阪' },
+  { id: 'gunma', name: '群馬県' },
+  { id: 'shizuoka', name: '静岡県' },
+  { id: 'nara', name: '奈良県' },
+  { id: 'wakayama', name: '和歌山県' },
+  { id: 'saga', name: '佐賀県' }
+];

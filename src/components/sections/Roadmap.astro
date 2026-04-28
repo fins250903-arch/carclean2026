@@ -1,0 +1,70 @@
+---
+interface Props {
+  displayName: string;
+}
+
+const { displayName } = Astro.props;
+
+const steps = [
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smartphone"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>',
+        title: "最短1分の簡単予約",
+        desc: "LINEまたはお電話でご相談ください。症状をお伺いし、すぐにお見積りをご提示。「どうしよう」という不安から素早く解放されます。"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+        title: "出張対応で移動時間ゼロ",
+        desc: `${displayName}のご指定の場所までプロが伺います。店舗へ持ち込む手間や、施工中の待ち時間を別の用事に使え、大幅な「時間の節約」になります。`
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+        title: "プロの技術で即日解決",
+        desc: "独自のノウハウと専用機材により、素人では何日もかかる作業を数時間で完了。すぐに車を使える状態に戻します。"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-smile"><circle cx="12" cy="12" r="10"/><path d="M8 14s1.5 2 4 2 4-2 4-2"/><line x1="9" x2="9.01" y1="9" y2="9"/><line x1="15" x2="15.01" y1="9" y2="9"/></svg>',
+        title: "理想の快適空間の完成",
+        desc: "もう臭いに悩むことはありません。ご家族や大切な人を自信を持って乗せられる、清潔で快適な車内空間を取り戻します。"
+    }
+];
+---
+
+<section class="py-16 bg-white overflow-hidden">
+    <div class="container mx-auto px-4">
+        <div class="text-center mb-16">
+            <h2 class="text-3xl font-bold text-gray-800 mb-4">
+                もう悩まない。最短ルートで「理想の状態」へ
+            </h2>
+            <p class="text-gray-600 max-w-2xl mx-auto mobile-text">
+                独学で100時間を浪費しますか？それともプロに任せて最短ルートで理想を手に入れますか？<br class="hidden md:block" />
+                ご依頼から完了まで、あなたの貴重な時間を奪うことなく、圧倒的な解放感と自信をご提供します。
+            </p>
+        </div>
+
+        <div class="max-w-5xl mx-auto relative">
+            {/* Connecting line */}
+            <div class="hidden md:block absolute top-[45%] left-[5%] right-[5%] h-1 bg-blue-100 -z-10"></div>
+
+            <div class="grid md:grid-cols-4 gap-8">
+                {steps.map((step, index) => (
+                    <div class="flex flex-col items-center text-center relative">
+                        <div class="w-16 h-16 bg-primary rounded-full flex items-center justify-center shadow-lg border-4 border-white mb-6 z-10 text-white">
+                            <Fragment set:html={step.icon} />
+                        </div>
+                        <div class="bg-gray-50 rounded-xl p-5 w-full h-full border border-gray-100 relative">
+                            <div class="absolute -top-3 left-1/2 transform -translate-x-1/2 bg-blue-100 text-primary text-xs font-bold px-3 py-1 rounded-full">
+                                STEP {index + 1}
+                            </div>
+                            <h3 class="text-lg font-bold text-gray-800 mt-2 mb-3">
+                                {step.title}
+                            </h3>
+                            <p class="text-sm text-gray-600 leading-relaxed text-left">
+                                {step.desc}
+                            </p>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>

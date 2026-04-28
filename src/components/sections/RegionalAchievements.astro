@@ -1,0 +1,104 @@
+---
+import { localCaseStudies } from '../../data/localCaseStudies';
+
+interface Props {
+  regionName: string;
+  displayName: string;
+  niche?: 'car' | 'truck';
+}
+
+const { regionName, displayName, niche = 'car' } = Astro.props;
+const isTruck = niche === 'truck';
+
+// Filter cases by niche and region
+const nicheCases = localCaseStudies.filter(c => c.niche === niche);
+
+// For Truck: Show cases in current region OR "ALL"
+// For Car: Show cases in current region
+const regionCases = nicheCases.filter(c => 
+    isTruck 
+        ? (c.region === regionName || c.region === displayName || c.region === "ALL")
+        : (c.region === regionName || c.region === displayName)
+);
+
+// Get up to 2 recent cases
+const displayCases = regionCases.slice(0, 2);
+---
+
+<section class="py-16 bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4 max-w-5xl">
+        <h2 class="text-3xl font-bold text-center text-gray-800 mb-12">
+            {displayName}周辺の施工実績
+        </h2>
+        
+        {displayCases.length > 0 ? (
+            <div class="space-y-8 mb-12">
+                {displayCases.map((item) => (
+                    <div class="bg-white rounded-2xl shadow-md border border-gray-100 overflow-hidden flex flex-col md:flex-row">
+                        <div class="md:w-1/3 relative h-64 md:h-auto">
+                            <img
+                                src={item.image}
+                                alt={item.title}
+                                class="w-full h-full object-cover"
+                            />
+                            <div class="absolute top-4 left-4 bg-primary text-white text-xs font-bold px-3 py-1 rounded-full shadow-sm">
+                                {item.city}
+                            </div>
+                        </div>
+                        <div class="md:w-2/3 p-6 md:p-8 flex flex-col justify-center">
+                            <h3 class="text-xl md:text-2xl font-bold text-gray-800 mb-4">{item.title}</h3>
+                            
+                            <div class="mb-4">
+                                <h4 class="font-bold text-gray-700 flex items-center gap-2 mb-2">
+                                    <span class="text-primary text-lg">■</span> お悩み
+                                </h4>
+                                <p class="text-gray-600 text-sm leading-relaxed bg-gray-50 p-3 rounded-lg">
+                                    {item.problem}
+                                </p>
+                            </div>
+                            
+                            <div>
+                                <h4 class="font-bold text-gray-700 flex items-center gap-2 mb-2">
+                                    <span class="text-green-600 text-lg">■</span> プロの視点と解決法
+                                </h4>
+                                <p class="text-gray-600 text-sm leading-relaxed bg-green-50 p-3 rounded-lg border border-green-100">
+                                    {item.professionalInsight}
+                                </p>
+                            </div>
+                            
+                            <div class="mt-4 pt-4 border-t border-gray-100">
+                                <p class="font-bold text-gray-800 text-sm">
+                                    <span class="text-accent mr-2">✨ 結果：</span>
+                                    {item.result}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                ))}
+            </div>
+        ) : (
+            <div class="text-center mb-12">
+                <p class="text-gray-600 mb-4">このエリアの最新の施工実績は、ブログにて随時更新しております。</p>
+            </div>
+        )}
+
+        <div class="text-center">
+            <div class="inline-block bg-white p-6 md:p-8 rounded-2xl shadow-sm border-2 border-primary/20 w-full max-w-2xl">
+                <h3 class="text-xl font-bold text-gray-800 mb-3 flex items-center justify-center gap-2">
+                    <span>📸</span> エリアごとの最新作業実績を公開中！
+                </h3>
+                <p class="text-gray-600 text-sm mb-6">
+                    各地域での様々なトラブル解決事例や、実際のビフォーアフターをブログで詳しくご紹介しています。
+                </p>
+                <a 
+                    href="https://carinteriorcleaning.jp/blog/jisseki/" 
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="inline-block bg-primary hover:bg-primary/90 text-white font-bold py-4 px-10 rounded-full shadow-lg transition-transform hover:scale-105"
+                >
+                    作業実績一覧を見る（公式ブログ）
+                </a>
+            </div>
+        </div>
+    </div>
+</section>

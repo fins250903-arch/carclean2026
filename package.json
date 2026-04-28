@@ -3,23 +3,28 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build && node scripts/copy-coating.js && node scripts/prepare-xserver.js",
-    "start": "next start",
-    "lint": "next lint"
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
   },
   "dependencies": {
-    "@hookform/resolvers": "^5.2.2",
+    "astro": "^4.5.0",
+    "@astrojs/react": "^3.0.0",
+    "@astrojs/tailwind": "^5.1.0",
+    "@astrojs/sitemap": "^3.1.1",
+    "@astrojs/vercel": "^7.3.2",
+    "@hookform/resolvers": "^3.3.4",
     "clsx": "^2.1.0",
-    "framer-motion": "^10.0.0",
-    "lucide-react": "^0.300.0",
-    "next": "^16.1.1-canary.32",
-    "nodemailer": "^7.0.12",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-hook-form": "^7.71.1",
-    "tailwind-merge": "^2.2.0",
-    "zod": "^4.3.5"
+    "framer-motion": "^11.0.8",
+    "lucide-react": "^0.344.0",
+    "nodemailer": "^6.9.11",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-hook-form": "^7.51.0",
+    "tailwind-merge": "^2.2.1",
+    "zod": "^3.22.4"
   },
   "devDependencies": {
     "@types/node": "^20",

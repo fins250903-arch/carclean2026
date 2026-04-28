@@ -1,0 +1,11 @@
+---
+interface Props {
+  data: any[];
+}
+
+const { data } = Astro.props;
+---
+
+{data.map((schema) => (
+  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
+))}

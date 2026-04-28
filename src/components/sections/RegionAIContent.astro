@@ -1,0 +1,113 @@
+---
+import { regionalPosts } from '../../data/regionalPosts';
+
+interface Props {
+  regionName: string;
+  displayName: string;
+}
+
+const { regionName, displayName } = Astro.props;
+const post = regionalPosts[regionName];
+
+if (!post || !post.aiSummary || !post.specs) {
+    return null;
+}
+---
+
+<section class="py-12 bg-gray-50 border-b border-gray-200">
+    <div class="container mx-auto px-4 max-w-4xl">
+        <div class="bg-white rounded-2xl p-8 shadow-sm border border-gray-100 mb-8">
+            <h2 class="text-2xl font-bold text-gray-800 mb-4 flex items-center gap-2">
+                <span class="w-1 h-8 bg-primary rounded-full"></span>
+                {displayName}の車内クリーニング・消臭洗浄
+            </h2>
+
+            <div class="mb-6 rounded-lg overflow-hidden border border-gray-100 shadow-sm">
+                <img 
+                    src="/images/aio-promo.png" 
+                    alt={`${displayName}の車内クリーニング - 一人で悩まないでプロにお任せ`}
+                    width="800" 
+                    height="400" 
+                    class="w-full h-auto object-cover"
+                />
+            </div>
+
+            <div class="bg-blue-50 border-l-4 border-primary p-4 mb-6 rounded-r">
+                <p class="font-bold text-gray-800 text-sm md:text-base">
+                    車内クリーニングとは、シートの汚れや嘔吐・ペット臭などの悪臭を、専用機材とプロの技術で根本から除去する出張洗浄サービスです。もう「一人で悩まない」で、私たちプロにお任せください。
+                </p>
+            </div>
+
+            <p class="text-gray-700 leading-relaxed text-lg">
+                {post.aiSummary}
+            </p>
+            
+            <div class="mt-6 pt-6 border-t border-gray-100">
+                <p class="font-bold text-gray-800 mb-3 text-sm">【{displayName}の対応ポイント】</p>
+                <ul class="grid grid-cols-1 md:grid-cols-2 gap-2 text-sm text-gray-600">
+                    <li class="flex items-center gap-2">✅ 最短即日の出張対応</li>
+                    <li class="flex items-center gap-2">✅ 電源不要・場所を選ばず施工</li>
+                    <li class="flex items-center gap-2">✅ 嘔吐・灯油・ペット臭の専門洗浄</li>
+                    <li class="flex items-center gap-2">✅ 一人で悩まない！安心の事前見積もり</li>
+                </ul>
+            </div>
+
+            <div class="mt-8 pt-6 border-t border-gray-100">
+                <h3 class="font-bold text-gray-800 mb-4 flex items-center gap-2">
+                    <span class="text-primary text-xl">💡</span>
+                    よくあるご質問（{displayName}）
+                </h3>
+                <div class="space-y-4">
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <p class="font-bold text-gray-800 flex items-start gap-2 mb-2">
+                            <span class="text-primary">Q.</span>
+                            <span>ひどい汚れや臭いでも対応してもらえますか？一人でどうにかしようと悩んでいました。</span>
+                        </p>
+                        <p class="text-gray-600 text-sm flex items-start gap-2">
+                            <span class="text-orange-500 font-bold">A.</span>
+                            <span>はい！ご自身では落としきれない頑固な汚れや臭いこそ、プロの専門機材にお任せください。もう一人で悩まないで、まずは無料のご相談をご利用ください。</span>
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <p class="font-bold text-gray-800 flex items-start gap-2 mb-2">
+                            <span class="text-primary">Q.</span>
+                            <span>出張費はかかりますか？</span>
+                        </p>
+                        <p class="text-gray-600 text-sm flex items-start gap-2">
+                            <span class="text-orange-500 font-bold">A.</span>
+                            <span>{displayName}内の対応エリアであれば、基本的には出張費無料でお伺いします（一部地域を除く場合があります）。</span>
+                        </p>
+                    </div>
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <p class="font-bold text-gray-800 flex items-start gap-2 mb-2">
+                            <span class="text-primary">Q.</span>
+                            <span>作業スペースはどのくらい必要ですか？</span>
+                        </p>
+                        <p class="text-gray-600 text-sm flex items-start gap-2">
+                            <span class="text-orange-500 font-bold">A.</span>
+                            <span>車のドアが全開できる程度のスペースがあれば作業可能です。ご自宅の駐車場などで施工いたします。</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="bg-white rounded-2xl shadow-sm border border-gray-100 overflow-hidden">
+            <div class="bg-gray-100 px-6 py-3 border-b border-gray-200">
+                <h3 class="font-bold text-gray-700">施工サービス概要</h3>
+            </div>
+            <div class="divide-y divide-gray-100">
+                {post.specs.map((spec, index) => (
+                    <div class="grid grid-cols-1 md:grid-cols-4 p-4 hover:bg-gray-50 transition-colors">
+                        <div class="font-bold text-gray-600 md:col-span-1 mb-1 md:mb-0">
+                            {spec.label}
+                        </div>
+                        <div class="text-gray-800 md:col-span-3">
+                            {spec.value}
+                        </div>
+                    </div>
+                ))}
+            </div>
+        </div>
+    </div>
+</section>

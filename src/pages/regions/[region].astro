@@ -1,0 +1,133 @@
+---
+import MainLayout from '../../layouts/MainLayout.astro';
+import { regions } from '../../data/regions';
+import { generateRegionMetadata, generateJsonLd } from '../../lib/seo';
+import { regionalPosts } from '../../data/regionalPosts';
+import { generateQuestionnaireJsonLd } from '../../data/questionnaireTestimonials';
+import JsonLd from '../../components/seo/JsonLd.astro';
+
+// Astro Components
+import Hero from '../../components/sections/Hero.astro';
+import RegionAIContent from '../../components/sections/RegionAIContent.astro';
+import Problem from '../../components/sections/Problem.astro';
+import Solution from '../../components/sections/Solution.astro';
+import Comparison from '../../components/sections/Comparison.astro';
+import Campaign from '../../components/sections/Campaign.astro';
+import CTA from '../../components/sections/CTA.astro';
+import FAQ from '../../components/sections/FAQ.astro';
+import Reasons from '../../components/sections/Reasons.astro';
+import Benefits from '../../components/sections/Benefits.astro';
+import Roadmap from '../../components/sections/Roadmap.astro';
+import RegionalAchievements from '../../components/sections/RegionalAchievements.astro';
+import Targets from '../../components/sections/Targets.astro';
+import AreaCoverage from '../../components/sections/AreaCoverage.astro';
+import Flow from '../../components/sections/Flow.astro';
+import Profile from '../../components/sections/Profile.astro';
+import Expertise from '../../components/sections/Expertise.astro';
+import Pricing from '../../components/sections/Pricing.astro';
+import Closing from '../../components/sections/Closing.astro';
+
+// React Components
+import { RegionProvider } from '../../lib/RegionContext';
+import QuestionnaireTestimonials from '../../components/sections/QuestionnaireTestimonials';
+import Testimonials from '../../components/sections/Testimonials';
+import Blog from '../../components/sections/Blog';
+import ContactForm from '../../components/sections/ContactForm';
+import FloatingCTA from '../../components/sections/FloatingCTA';
+
+export async function getStaticPaths() {
+  const paths = [];
+  regions.forEach(region => {
+    // Standard page
+    paths.push({
+      params: { region: region.id },
+      props: { regionName: region.name, niche: 'car', path: `/regions/${region.id}` }
+    });
+    // Truck page
+    paths.push({
+      params: { region: `${region.id}-truck` },
+      props: { regionName: region.name, niche: 'truck', path: `/regions/${region.id}-truck` }
+    });
+  });
+  return paths;
+}
+
+const { regionName, niche, path } = Astro.props;
+const isTruck = niche === 'truck';
+
+const post = regionalPosts[regionName];
+const displayName = post?.displayName || regionName;
+const questionnaireStructuredData = generateQuestionnaireJsonLd(regionName, displayName, path);
+const regionOverrides = {
+    displayName,
+    aiSummary: post?.aiSummary,
+    article: post?.title && post?.excerpt && post?.image ? {
+        headline: post.title,
+        description: post.excerpt,
+        image: post.image,
+    } : undefined,
+    localBusiness: post?.structuredData ? {
+        areaServed: post.structuredData.areaServed,
+        description: post.structuredData.description,
+        geo: post.structuredData.geo
+            ? {
+                ...post.structuredData.geo,
+                addressRegion: regionName,
+            }
+            : undefined,
+    } : undefined,
+};
+
+const metadata = generateRegionMetadata(regionName, path, niche);
+const jsonLdData = generateJsonLd(regionName, path, regionOverrides, niche);
+const combinedJsonLd = [...jsonLdData, ...questionnaireStructuredData];
+
+---
+
+<MainLayout 
+  title={metadata.title}
+  description={metadata.description}
+  keywords={metadata.keywords}
+  canonical={metadata.alternates.canonical}
+  ogImage={isTruck ? '/images/truck-fv.png' : '/images/fv.png'}
+>
+  <JsonLd slot="head" data={combinedJsonLd} />
+
+  <main class="min-h-screen bg-white pb-20 md:pb-0">
+    <Hero regionName={regionName} displayName={displayName} niche={niche} />
+    <RegionAIContent regionName={regionName} displayName={displayName} />
+    <Problem regionName={regionName} displayName={displayName} niche={niche} />
+    <Solution regionName={regionName} displayName={displayName} niche={niche} />
+    <Comparison displayName={displayName} />
+    
+    <Campaign displayName={displayName} />
+    <CTA />
+    <Reasons displayName={displayName} />
+    <Benefits />
+    <Roadmap displayName={displayName} />
+    
+    <RegionProvider client:load regionName={regionName} displayName={displayName} niche={niche} path={path}>
+      <QuestionnaireTestimonials client:visible />
+      <Testimonials client:visible />
+      <RegionalAchievements regionName={regionName} displayName={displayName} niche={niche} />
+      <Targets />
+      <Campaign displayName={displayName} />
+      <AreaCoverage regionName={regionName} />
+      <CTA />
+      <Flow niche={niche} />
+      <Profile displayName={displayName} />
+      <Expertise />
+      <Pricing regionName={regionName} niche={niche} />
+      <Campaign displayName={displayName} />
+      <AreaCoverage regionName={regionName} />
+      <CTA />
+      <FAQ niche={niche} />
+      <Blog client:visible />
+      <ContactForm client:visible />
+      <Closing regionName={regionName} displayName={displayName} niche={niche} path={path} />
+      <FloatingCTA client:visible />
+    </RegionProvider>
+  </main>
+</MainLayout>
+
+

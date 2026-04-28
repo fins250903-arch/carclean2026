@@ -1,0 +1,63 @@
+---
+import '../styles/globals.css';
+import { STORE_NAME, SITE_URL } from '@/lib/site';
+
+interface Props {
+	title?: string;
+	description?: string;
+	keywords?: string;
+	canonical?: string;
+	ogImage?: string;
+}
+
+const { 
+	title = `${STORE_NAME} | 車内クリーニング・シート洗浄の専門店`,
+	description = "車内清掃「特急便」は、車内クリーニング、シート洗浄、嘔吐・灯油・ペット臭の消臭洗浄に対応する出張専門サービスです。",
+	keywords = "車内清掃 特急便, 車内クリーニング, シート洗浄, 嘔吐掃除, 消臭",
+	canonical,
+	ogImage = '/images/fv.png'
+} = Astro.props;
+
+const canonicalUrl = canonical || new URL(Astro.url.pathname, Astro.site).toString();
+const fullOgImage = new URL(ogImage, Astro.site).toString();
+---
+
+<!doctype html>
+<html lang="ja">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="generator" content={Astro.generator} />
+		
+		<!-- SEO -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="keywords" content={keywords} />
+		<link rel="canonical" href={canonicalUrl} />
+		
+		<!-- Open Graph -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonicalUrl} />
+		<meta property="og:site_name" content={STORE_NAME} />
+		<meta property="og:image" content={fullOgImage} />
+		
+		<!-- Twitter -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:title" content={title} />
+		<meta name="twitter:description" content={description} />
+		<meta name="twitter:image" content={fullOgImage} />
+		
+		<!-- Fonts -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+		<slot name="head" />
+	</head>
+	<body>
+		<slot />
+	</body>
+</html>

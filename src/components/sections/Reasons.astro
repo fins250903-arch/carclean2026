@@ -1,0 +1,99 @@
+---
+interface Props {
+  displayName: string;
+}
+
+const { displayName } = Astro.props;
+
+const reasons = [
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a2 2 0 0 0-.66-1.41l-3.22-3.12a2 2 0 0 0-1.41-.57H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
+        title: "圧倒的スピード対応",
+        desc: "すぐ対応で到着。部分クリーニングなら作業も1時間で完了。",
+        color: "bg-blue-500"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>',
+        title: "100℃スチームで根本除去",
+        desc: "ただの消臭ではなく、高温スチームと業務用のリンサーで、シート内部の汚れごと吸い出します。",
+        color: "bg-orange-500"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-piggy-bank"><path d="M19 5c-1.5 0-2.8 1.4-3 2-3.5-1.5-11-.3-11 5 0 1.8 0 3 2 4.5V20h4v-2h3v2h4v-4c1-.5 1.7-1 2-2h2v-4h-2c0-1-.5-1.5-1-2h0V5z"/><path d="M11 12v1"/><path d="M18 11v1"/></svg>',
+        title: "ディーラーの1/3の価格",
+        desc: "無店舗型の出張専門店だからできる低価格。軽自動車2.2万円〜。",
+        color: "bg-green-500"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
+        title: "場所を選ばず電源不要",
+        desc: "発電機を持参しますので、ドアが開けられるスペースがあればどこでも作業可能です。",
+        color: "bg-purple-500"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-shield-check"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10"/><path d="m9 12 2 2 4-4"/></svg>',
+        title: "安心の洗剤を使用",
+        desc: "お子様やペットにも安心な洗剤を使用しています。",
+        color: "bg-teal-500"
+    },
+    {
+        icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-map-pin"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>',
+        title: `${displayName}地域密着`,
+        desc: `${displayName}の地理を知り尽くしているからこそ、素早く駆けつけられます。`,
+        color: "bg-red-500"
+    }
+];
+---
+
+<section class="py-16 bg-gray-50">
+    <div class="container mx-auto px-4">
+        <h2 class="text-3xl md:text-4xl font-bold text-center text-gray-800 mb-12">
+            {displayName}で選ばれる理由<br />
+            <span class="text-primary text-2xl mt-2 block">他社とはここが違います</span>
+        </h2>
+
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-12">
+            {reasons.map((reason, index) => (
+                <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 flex flex-col items-center text-center">
+                    <div class={`${reason.color} text-white w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-md`}>
+                        <Fragment set:html={reason.icon} />
+                    </div>
+                    <h3 class="text-xl font-bold text-gray-800 mb-2">{reason.title}</h3>
+                    <p class="text-gray-600 text-sm leading-relaxed mobile-text text-left">
+                        {index === 0 ? "すぐ対応で到着。車内クリーニング専門店だから、スピードと質の高さを両立。" :
+                            index === 1 ? "ただの消臭ではなく、高温スチームでの「シート洗浄」で、内部の汚れごと吸い出します。" :
+                                reason.desc}
+                    </p>
+                </div>
+            ))}
+        </div>
+
+        <div class="max-w-4xl mx-auto bg-white p-6 rounded-2xl shadow-xl overflow-hidden">
+            <div class="grid md:grid-cols-2 gap-8 items-center">
+                <div class="order-2 md:order-1">
+                    <h3 class="text-2xl font-bold text-accent mb-4">
+                        これが「根本除去」の証です
+                    </h3>
+                    <p class="text-gray-700 mb-4 mobile-text">
+                        こちらの写真をご覧ください。左側の黒ずんだ部分が洗浄前、右側がスチーム洗浄後です。<br />
+                        表面を拭くだけでは、シートの奥に染み込んだ嘔吐物や加齢臭の元（皮脂汚れ）は除去できません。当社の業務用リンサーは温水で汚れを浮かし、根こそぎ吸引します。<br />
+                        また、使用する洗浄剤は施工後、数時間で分解され無害化。小さなお子様やペットが触れるシートでも安心です。
+                    </p>
+                    <p class="font-bold text-primary">
+                        これが「車座席クリーニング」のプロの技術。車内嘔吐の消臭に絶対的な自信を持つ理由です。
+                    </p>
+                </div>
+                <div class="relative h-64 w-full rounded-xl overflow-hidden order-1 md:order-2">
+                    <img
+                        src="/images/steam.webp"
+                        alt="スチーム洗浄による汚れ除去の様子"
+                        class="w-full h-full object-cover"
+                    />
+                    <div class="absolute bottom-2 right-2 bg-black/60 text-white text-xs px-2 py-1 rounded">
+                        スチーム洗浄の様子
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
