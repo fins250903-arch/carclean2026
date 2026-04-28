@@ -1,5 +1,4 @@
-"use client";
-
+import React from 'react';
 import { useRegion } from '@/lib/RegionContext';
 import { Mail } from 'lucide-react';
 
@@ -9,57 +8,96 @@ export default function ContactForm({ regionName: propRegionName }: { regionName
 
     return (
         <section id="contact" className="py-10 bg-white border-t border-gray-200">
-            <div className="container mx-auto px-8 max-w-4xl">
-                <div className="text-center mb-8">
-                    <h2 className="text-3xl font-bold text-gray-800 mb-4">
-                        ご相諁E�Eお問ぁE��わせ
-                    </h2>
-                    <p className="text-gray-600">
-                        お急ぎ�E方は、お電話また�ELINEでも受け付けております、E
-                    </p>
-                </div>
-
-                {/* Contact Options */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    <a href="tel:07084280866" className="block group">
-                        <div className="bg-red-50 border-2 border-red-100 rounded-xl p-6 text-center hover:border-red-500 transition-colors shadow-sm cursor-pointer h-full">
-                            <p className="text-gray-600 font-bold mb-2">お電話でのお問合せ</p>
-                            <p className="text-3xl font-black text-red-600 group-hover:scale-105 transition-transform">
-                                070-8428-0866
-                            </p>
-                            <p className="text-xs text-gray-500 mt-2">受付時間！E:00、E0:00�E�年中無休！E/p>
+            <div className="container mx-auto px-8">
+                <div className="max-w-4xl mx-auto">
+                    <div className="text-center mb-8">
+                        <div className="inline-flex items-center justify-center w-16 h-16 bg-primary/10 rounded-full mb-4 text-primary">
+                            <Mail size={32} />
                         </div>
-                    </a>
-                    <a href="https://lin.ee/Xs8Orp2" target="_blank" rel="noopener noreferrer" className="block group">
-                        <div className="bg-green-50 border-2 border-green-100 rounded-xl p-6 text-center hover:border-green-500 transition-colors shadow-sm cursor-pointer h-full">
-                            <p className="text-gray-600 font-bold mb-2">LINEでのお問合せ</p>
-                            <p className="text-3xl font-black text-green-600 group-hover:scale-105 transition-transform flex items-center justify-center gap-2">
-                                LINE公弁E
-                            </p>
-                            <p className="text-xs text-gray-500 mt-2">友だち追加で簡単見積もめE/p>
-                        </div>
-                    </a>
-                </div>
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
+                            無料相談・お見積もり
+                        </h2>
+                        <p className="text-gray-600">
+                            {regionName}周辺での車内トラブル、お気軽にご相談ください。<br />
+                            お急ぎの場合はお電話、またはLINEがスムーズです。
+                        </p>
+                    </div>
 
-                {/* External Form Link */}
-                <div className="bg-blue-50 p-8 rounded-2xl shadow-inner text-center border-2 border-blue-100">
-                    <h3 className="text-xl font-bold text-gray-800 mb-6">
-                        メールでのお問ぁE��わせ・お見積り
-                    </h3>
-                    <p className="text-gray-600 mb-8">
-                        専用のメールフォームよりお問ぁE��わせぁE��だけます、Ebr />
-                        以下�EボタンをクリチE��して、忁E��事頁E��ご�E力ください、E
-                    </p>
+                    <div className="bg-gray-50 rounded-3xl p-8 md:p-12 shadow-inner border border-gray-100">
+                        <form className="space-y-6" action="https://formspree.io/f/xknlodez" method="POST">
+                            <div className="grid md:grid-cols-2 gap-6">
+                                <div>
+                                    <label htmlFor="name" className="block text-sm font-bold text-gray-700 mb-2">お名前</label>
+                                    <input
+                                        type="text"
+                                        id="name"
+                                        name="name"
+                                        required
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                        placeholder="例：山田 太郎"
+                                    />
+                                </div>
+                                <div>
+                                    <label htmlFor="tel" className="block text-sm font-bold text-gray-700 mb-2">電話番号</label>
+                                    <input
+                                        type="tel"
+                                        id="tel"
+                                        name="tel"
+                                        required
+                                        className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                        placeholder="例：090-1234-5678"
+                                    />
+                                </div>
+                            </div>
 
-                    <a
-                        href="https://insbs.net/ok2/tokubinntoi/"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        className="inline-flex items-center justify-center gap-3 w-full md:w-2/3 py-4 px-8 rounded-full bg-blue-600 text-white font-bold text-lg shadow-lg hover:bg-blue-700 hover:scale-105 hover:shadow-xl transition-all"
-                    >
-                        <Mail size={24} />
-                        問い合わせフォームを開ぁE
-                    </a>
+                            <div>
+                                <label htmlFor="region" className="block text-sm font-bold text-gray-700 mb-2">ご住所・市区町村</label>
+                                <input
+                                    type="text"
+                                    id="region"
+                                    name="region"
+                                    defaultValue={regionName}
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                    placeholder="例：大阪府大阪市..."
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="car_model" className="block text-sm font-bold text-gray-700 mb-2">車種</label>
+                                <input
+                                    type="text"
+                                    id="car_model"
+                                    name="car_model"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                    placeholder="例：トヨタ アルファード"
+                                />
+                            </div>
+
+                            <div>
+                                <label htmlFor="message" className="block text-sm font-bold text-gray-700 mb-2">お問い合わせ内容</label>
+                                <textarea
+                                    id="message"
+                                    name="message"
+                                    required
+                                    rows={4}
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-200 focus:ring-2 focus:ring-primary focus:border-transparent outline-none transition-all"
+                                    placeholder="トラブルの内容（嘔吐、灯油漏れ、ペットの粗相など）を詳しくお知らせください。"
+                                ></textarea>
+                            </div>
+
+                            <div className="text-center">
+                                <button
+                                    type="submit"
+                                    className="bg-primary hover:bg-primary-dark text-white font-bold py-4 px-12 rounded-full shadow-lg transition-all hover:scale-105 active:scale-95"
+                                >
+                                    この内容で送信する
+                                </button>
+                                <p className="text-xs text-gray-400 mt-4">
+                                    ※送信いただいた内容は、お見積もり・サービス提供の目的以外には使用いたしません。
+                                </p>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
