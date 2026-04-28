@@ -6,7 +6,7 @@ import vercel from '@astrojs/vercel/static';
 
 export default defineConfig({
   site: 'https://carinteriorcleaning.jp',
-  integrations: [react(), tailwind(), sitemap()],
+  integrations: [react(), tailwind() /*, sitemap() */],
   output: 'static',
   adapter: vercel(),
 });

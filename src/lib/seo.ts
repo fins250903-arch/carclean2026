@@ -1,4 +1,44 @@
-import { Metadata } from 'next';
+export interface Metadata {
+  title?: string;
+  description?: string;
+  keywords?: string;
+  metadataBase?: URL;
+  alternates?: {
+    canonical?: string;
+  };
+  openGraph?: {
+    title?: string;
+    description?: string;
+    url?: string;
+    siteName?: string;
+    locale?: string;
+    type?: string;
+    images?: Array<{
+      url: string;
+      width?: number;
+      height?: number;
+      alt?: string;
+    }>;
+  };
+  twitter?: {
+    card?: string;
+    title?: string;
+    description?: string;
+    images?: string[];
+  };
+  robots?: {
+    index?: boolean;
+    follow?: boolean;
+    googleBot?: {
+      index?: boolean;
+      follow?: boolean;
+      'max-video-preview'?: number;
+      'max-image-preview'?: string;
+      'max-snippet'?: number;
+    };
+  };
+}
+
 import { faqData, truckFaqData, flowData, serviceData } from '@/data/seoData';
 import { INSTAGRAM_URL, LINE_URL, SITE_URL, STORE_NAME } from '@/lib/site';
 

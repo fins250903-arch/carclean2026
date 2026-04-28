@@ -1,10 +1,13 @@
-import Image from 'next/image';
+
+
 import { useRegion } from '@/lib/RegionContext';
 import { useState } from 'react';
 import { regionalPosts } from '@/data/regionalPosts';
 
-export default function Blog() {
-    const { regionName, displayName } = useRegion();
+export default function Blog({ regionName: propRegionName, displayName: propDisplayName }: { regionName?: string, displayName?: string }) {
+    const context = useRegion();
+    const regionName = propRegionName || context.regionName;
+    const displayName = propDisplayName || context.displayName;
 
     type BlogPost = {
         id: number;
@@ -168,11 +171,10 @@ export default function Blog() {
                             )}
 
                             <div className="relative h-48 w-full overflow-hidden">
-                                <Image
+                                <img
                                     src={post.image}
                                     alt={post.title}
-                                    fill
-                                    className="object-cover group-hover:scale-105 transition-transform duration-300"
+                                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                                 />
                                 <div className="absolute top-2 left-2 flex gap-2">
                                     <div className="bg-primary text-white text-xs font-bold px-2 py-1 rounded shadow-sm">

@@ -3,8 +3,9 @@
 import { useRegion } from '@/lib/RegionContext';
 import { Mail } from 'lucide-react';
 
-export default function ContactForm() {
-    const { regionName } = useRegion();
+export default function ContactForm({ regionName: propRegionName }: { regionName?: string }) {
+    const context = useRegion();
+    const regionName = propRegionName || context.regionName;
 
     return (
         <section id="contact" className="py-16 bg-white border-t border-gray-200">

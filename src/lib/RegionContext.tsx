@@ -23,7 +23,13 @@ export function RegionProvider({ children, regionName, displayName, niche = 'car
 export function useRegion() {
     const context = useContext(RegionContext);
     if (context === undefined) {
-        throw new Error('useRegion must be used within a RegionProvider');
+        // Fallback for Astro islands that might be rendered without a parent provider
+        return {
+            regionName: '大阪',
+            displayName: '大阪',
+            niche: 'car' as const,
+            path: '/'
+        };
     }
     return context;
 }

@@ -1,11 +1,14 @@
 "use client";
 
-import Image from 'next/image';
+
+
 import { useRegion } from '@/lib/RegionContext';
 import { localCaseStudies } from '@/data/localCaseStudies';
 
-export default function Testimonials() {
-    const { regionName, displayName } = useRegion();
+export default function Testimonials({ regionName: propRegionName, displayName: propDisplayName }: { regionName?: string, displayName?: string }) {
+    const context = useRegion();
+    const regionName = propRegionName || context.regionName;
+    const displayName = propDisplayName || context.displayName;
     
     // Fetch regional cases
     const regionCases = localCaseStudies.filter(c => c.region === regionName || c.region === displayName);
@@ -82,11 +85,10 @@ export default function Testimonials() {
                     {voices.map((item, index) => (
                         <div key={index} className="bg-gray-50 rounded-xl overflow-hidden shadow-lg border border-gray-100 flex flex-col">
                             <div className="relative h-56 w-full">
-                                <Image
+                                <img
                                     src={item.image}
                                     alt={item.title}
-                                    fill
-                                    className="object-cover"
+                                    className="w-full h-full object-cover"
                                 />
                                 <span className="absolute top-2 right-2 bg-primary text-white text-xs font-bold px-2 py-1 rounded">
                                     {item.tag}

@@ -1,12 +1,14 @@
 "use client";
 
-import Image from 'next/image';
+
+
 
 import { questionnaireTestimonials } from '@/data/questionnaireTestimonials';
 import { useRegion } from '@/lib/RegionContext';
 
-export default function QuestionnaireTestimonials() {
-    const { displayName } = useRegion();
+export default function QuestionnaireTestimonials({ displayName: propDisplayName }: { displayName?: string }) {
+    const context = useRegion();
+    const displayName = propDisplayName || context.displayName;
 
     return (
         <section className="bg-amber-50 py-16">
@@ -43,13 +45,10 @@ export default function QuestionnaireTestimonials() {
                             {/* アンケート画像（手書き） */}
                             <div className="relative w-full overflow-hidden bg-white">
                                 <div className="relative aspect-[4/3] w-full">
-                                    <Image
+                                    <img
                                         src={item.image}
                                         alt={`お客様アンケート手書き原本 - ${item.category}`}
-                                        fill
-                                        sizes="(max-width: 640px) 100vw, (max-width: 1280px) 50vw, 33vw"
-                                        className="object-contain p-2"
-                                        quality={85}
+                                        className="w-full h-full object-contain p-2"
                                     />
                                 </div>
                             </div>
