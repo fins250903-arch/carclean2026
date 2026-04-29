@@ -52,3 +52,31 @@ export const questionnaireTestimonials: Testimonial[] = [
     result: "丁寧な対応に大変満足。同じ悩みの方にオススメとのコメントをいただいた。",
   }
 ];
+
+export const generateQuestionnaireJsonLd = (regionName: string, displayName: string, path: string) => {
+  return questionnaireTestimonials.map(t => ({
+    "@context": "https://schema.org",
+    "@type": "Review",
+    "itemReviewed": {
+      "@type": "LocalBusiness",
+      "name": `車内清掃 特急便 ${displayName}`,
+      "image": "https://carinteriorcleaning.jp/images/fv.png",
+      "telephone": "070-8428-0866",
+      "address": {
+        "@type": "PostalAddress",
+        "addressRegion": regionName,
+        "addressCountry": "JP"
+      }
+    },
+    "author": {
+      "@type": "Person",
+      "name": t.author
+    },
+    "reviewRating": {
+      "@type": "Rating",
+      "ratingValue": "5",
+      "bestRating": "5"
+    },
+    "reviewBody": t.content
+  }));
+};
