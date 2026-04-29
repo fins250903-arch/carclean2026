@@ -1,52 +1,65 @@
 ---
-interface Props {}
 ---
 
-<section class="py-10 bg-gradient-to-br from-gray-900 to-gray-800 text-white">
+<section class="py-20 bg-gray-900 text-white">
     <div class="container mx-auto px-8">
-        <div class="grid md:grid-cols-2 gap-12 items-center max-w-5xl mx-auto">
-            <div>
-                <h2 class="text-3xl font-bold mb-6">
-                    なぜ「専門店」の技術は<br />
-                    圧倒的に違うのか？
-                </h2>
-                <div class="space-y-6">
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-xl">1</div>
+        <div class="text-center mb-16">
+            <h2 class="text-3xl md:text-5xl font-black mb-4">「なぜこの価格なのか？」</h2>
+            <p class="text-gray-400 text-lg">私たちの圧倒的な専門性とお約束</p>
+        </div>
+
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+            <div class="space-y-8">
+                <div class="relative p-6 rounded-2xl bg-gray-800 border border-gray-700 hover:border-primary transition-colors group">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center font-bold text-2xl flex-shrink-0">
+                            01
+                        </div>
                         <div>
-                            <h3 class="font-bold text-xl mb-2">100℃の高温スチーム</h3>
-                            <p class="text-gray-300 text-sm">
-                                家庭用とは次元が違う業務用ボイラーを搭載。100℃の高温・高圧スチームで、シートの繊維奥に潜む菌や汚れを浮き上がらせ、瞬時に除菌します。
+                            <h3 class="text-xl font-bold mb-2">素材を見極める眼</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                車のシートは車種や年式によって素材が全く異なります。間違った溶剤を使えば一瞬で変色・劣化を招きます。私たちは数多くの施工実績から得た知見で、ファブリックから本革まで、最適なアプローチを導き出します。
                             </p>
                         </div>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-xl">2</div>
+                </div>
+
+                <div class="relative p-6 rounded-2xl bg-gray-800 border border-gray-700 hover:border-primary transition-colors group">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center font-bold text-2xl flex-shrink-0">
+                            02
+                        </div>
                         <div>
-                            <h3 class="font-bold text-xl mb-2">業務用リンサーによる強力吸引</h3>
-                            <p class="text-gray-300 text-sm">
-                                浮き上がらせた汚れを、強力なバキュームで「水ごと」吸い取ります。汚れを広げず、根本から抜き取るため、乾燥後の戻り臭がありません。
+                            <h3 class="text-xl font-bold mb-2">臭いの「元」を断つ機材</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                市販の消臭スプレーは臭いを「覆い隠す」だけ。当店の業務用高圧リンサーと100℃スチームは、シート深部（厚さ数センチのウレタン内部）まで浸透した汚れや菌を分解し、強制的に吸い上げます。
                             </p>
                         </div>
                     </div>
-                    <div class="flex gap-4">
-                        <div class="flex-shrink-0 w-12 h-12 bg-primary rounded-full flex items-center justify-center font-bold text-xl">3</div>
+                </div>
+
+                <div class="relative p-6 rounded-2xl bg-gray-800 border border-gray-700 hover:border-primary transition-colors group">
+                    <div class="flex items-start gap-4">
+                        <div class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center font-bold text-2xl flex-shrink-0">
+                            03
+                        </div>
                         <div>
-                            <h3 class="font-bold text-xl mb-2">プロ専用の消臭剤・抗菌剤</h3>
-                            <p class="text-gray-300 text-sm">
-                                市販品では反応しない頑固な臭い分子を分解。仕上げの抗菌コートにより、施工後の清潔な状態を長期間キープします。
+                            <h3 class="text-xl font-bold mb-2">将来の資産性を守る</h3>
+                            <p class="text-gray-400 leading-relaxed">
+                                自己流の強引な清掃は繊維を傷め、将来の車の売却価値（査定額）を大きく下げてしまいます。素材に優しい専用ケミカルを使用し、車本来の価値を保ちながらリフレッシュさせるプロの技術です。
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+
             <div class="relative group">
-                <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000 group-hover:duration-200"></div>
+                <div class="absolute -inset-1 bg-gradient-to-r from-primary to-accent rounded-2xl blur opacity-25 group-hover:opacity-50 transition duration-1000"></div>
                 <div class="relative bg-black rounded-2xl overflow-hidden shadow-2xl">
                     <img 
-                        src="/images/expertise.png" 
-                        alt="プロ仕様の清掃機材" 
-                        class="w-full h-auto opacity-90"
+                        src="/images/expertise-visual.webp" 
+                        alt="プロ仕様の洗浄風景" 
+                        class="w-full h-auto opacity-90 transition-transform duration-500 group-hover:scale-110"
                     />
                 </div>
             </div>

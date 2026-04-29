@@ -32,15 +32,21 @@ const fvImage = isTruck ? "/images/truck-fv.png" : "/images/fv_change_v2.png";
             alt={`${displayName}対応 ${STORE_NAME}`}
             class="w-full h-full object-cover object-[center_bottom] md:object-center opacity-80"
         />
-        <div class="absolute inset-0 bg-gradient-to-r from-black/80 via-black/40 to-transparent z-10"></div>
+        <div class="absolute inset-0 bg-white/20 z-10"></div>
     </div>
 
     <div class="container mx-auto px-8 md:px-16 z-20 relative">
         <div class="max-w-4xl">
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-white leading-tight mb-6 drop-shadow-lg">
+            <p class="text-xl md:text-3xl font-black text-red-600 mb-4 bg-white/90 inline-block px-4 py-1 rounded-sm shadow-sm rotate-[-1deg]">
+                {isTruck ? "キャビンが臭くて眠れませんか？今すぐリフレッシュ！" : "ディーラーで5日待てますか？絶対ムリ！"}
+            </p>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-blue-900 leading-tight mb-6 drop-shadow-sm">
                 {title}
                 <span class="block text-primary mt-2">早急に解決！</span>
             </h1>
+            <p class="text-lg md:text-2xl font-bold text-gray-800 mb-8">
+                {isTruck ? "その場に急行し、キャビンの臭い消し・汚れを完全除去。" : "その場に急行し、車内の臭い消し・汚れを完全除去。"}
+            </p>
             
             <div class="bg-yellow-50 border-2 border-yellow-400 px-8 py-6 rounded-xl shadow-lg mb-4 md:mb-6 inline-block text-left w-full max-w-md">
                 <p class="text-sm md:text-base font-bold text-gray-800">
@@ -54,15 +60,6 @@ const fvImage = isTruck ? "/images/truck-fv.png" : "/images/fv_change_v2.png";
                 </p>
             </div>
 
-            <div class="bg-white/90 px-8 py-6 rounded-lg shadow-lg border border-red-500 mb-6 inline-block text-left w-full max-w-md">
-                <p class="text-red-600 font-bold text-base md:text-lg">
-                    {isTruck ? "車内が臭くて眠れませんか？" : "ディーラーで5日待てますか？"}<br />
-                    <span class="text-2xl">{isTruck ? "今すぐリフレッシュ！" : "絶対ムリ！"}</span>
-                </p>
-                <p class="text-gray-800 font-bold text-sm md:text-base mt-1">
-                    {isTruck ? "その場に急行し、キャビンの臭い消し・汚れを完全除去。" : "その場に急行し、車内の臭い消し・汚れを完全除去。"}
-                </p>
-            </div>
 
             <div class="flex flex-col gap-3 items-center sm:items-start w-full sm:w-auto mb-6">
                 <a
@@ -83,20 +80,11 @@ const fvImage = isTruck ? "/images/truck-fv.png" : "/images/fv_change_v2.png";
                 </a>
             </div>
 
-            <p class="text-lg md:text-2xl font-bold text-white mb-6 drop-shadow">
-                {isTruck ? (
-                  <>長距離ドライバーの快適な空間を<br /><span class="text-accent text-3xl">即日洗浄</span>徹底除菌します<br /><span class="text-sm font-normal text-gray-200 mt-2 block">プロの技術で「キャビン内装クリーニング」を完遂</span></>
-                ) : (
-                  <>嘔吐・灯油こぼしの緊急トラブル<br /><span class="text-accent text-3xl">すぐ対応</span>駆けつけます<br /><span class="text-sm font-normal text-gray-200 mt-2 block">プロの技術で「車内装クリーニング」を完遂</span></>
-                )}
-                <span class="text-xs font-normal text-gray-400 block mt-1">（注釈：訪問場所や作業の込み具合により日時は変わります。）</span>
-            </p>
-
-            <div class="bg-white/95 p-4 md:p-5 rounded-xl shadow-md border-l-8 border-primary max-w-xl">
-                <p class="text-gray-800 text-sm md:text-base font-bold leading-relaxed">
+            <div class="bg-white/95 p-6 md:p-8 rounded-xl shadow-md border-l-8 border-primary max-w-xl">
+                <p class="text-gray-800 text-base md:text-lg font-bold leading-relaxed">
                     {descriptionTitle}
                 </p>
-                <p class="text-gray-700 text-sm mt-2 leading-relaxed">
+                <p class="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
                     {descriptionBody}
                 </p>
             </div>

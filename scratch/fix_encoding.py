@@ -1,26 +1,29 @@
 import os
 
-directory = 'src/components/sections'
-for filename in os.listdir(directory):
-    if filename.endswith('.astro') or filename.endswith('.tsx'):
-        filepath = os.path.join(directory, filename)
-        try:
-            # Try reading with current likely broken encoding (UTF-16 or Shift-JIS or just garbage)
-            # Actually, PowerShell default is usually UTF-16 for Set-Content in some cases or the system CP.
-            # But I'll try to read as UTF-8 first, then fallback.
-            with open(filepath, 'rb') as f:
-                content = f.read()
-            
-            # Identify encoding
-            # If it's PowerShell Set-Content, it might be UTF-16 LE with BOM or just bytes.
-            # I'll just try to decode and re-encode.
-            
-            # Actually, I'll use a simpler approach: 
-            # I know my previous edits were UTF-8, but PowerShell might have saved as something else.
-            # I'll just rewrite them with the content I expect or just try to fix the bytes.
-            
-            pass
-        except:
-            pass
+def fix_encoding(directory):
+    for root, dirs, files in os.walk(directory):
+        for file in files:
+            if file.endswith(('.astro', '.tsx', '.ts', '.css')):
+                file_path = os.path.join(root, file)
+                try:
+                    # Try reading as UTF-8
+                    with open(file_path, 'rb') as f:
+                        content = f.read()
+                    
+                    # Try to decode as utf-8, if fails, try shift-jis
+                    try:
+                        decoded = content.decode('utf-8')
+                    except UnicodeDecodeError:
+                        try:
+                            decoded = content.decode('shift-jis')
+                        except UnicodeDecodeError:
+                            decoded = content.decode('utf-8', errors='ignore')
+                    
+                    # Write back as clean UTF-8
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write(decoded)
+                    print(f"Fixed: {file_path}")
+                except Exception as e:
+                    print(f"Failed: {file_path} - {e}")
 
-# Since I don't want to risk more corruption, I'll just restore the key ones manually.
+fix_encoding(r'c:\Users\yu\OneDrive\Desktop\antiLP\base_template\src')
