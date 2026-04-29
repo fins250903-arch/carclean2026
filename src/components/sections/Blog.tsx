@@ -28,7 +28,7 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
             title: "車内嘔吐の正しい対処法と、プロの除菌技術",
             excerpt: "もし車内で嘔吐してしまったら…被害を最小限に抑えるための応急処置と、プロが行う徹底洗浄の内容を解説します。",
             date: "2024.03.15",
-            image: "/images/blog1.png",
+            image: "/images/cases/sienta_vomit_5.webp",
             category: "ノウハウ",
             url: "https://carinteriorcleaning.jp/blog/outo-syori/"
         },
@@ -37,14 +37,14 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
             title: "トラックキャビンの悪臭、原因はタバコだけじゃない？",
             excerpt: "長距離トラックのキャビンに染み付いた臭い。皮脂汚れやカビなど、見えない原因を根こそぎ除去する方法。",
             date: "2024.03.10",
-            image: "/images/blog2.png",
+            image: "/images/truck-fv.png",
             category: "トラック清掃",
             url: "https://carinteriorcleaning.jp/blog/truck-cabin-clean/"
         }
     ];
 
     const displayPosts = [
-        ...Object.values(regionalPosts).filter(post => post.regionName === displayName || post.regionName === regionName),
+        ...Object.values(regionalPosts).filter(post => post.displayName === displayName || post.title.includes(regionName.replace('府', '').replace('県', ''))),
         ...basePosts.map(post => ({ ...post, regionName: displayName }))
     ];
 
@@ -80,12 +80,15 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
                                     src={post.image} 
                                     alt={post.title} 
                                     className="w-full h-full object-cover transition-transform hover:scale-110"
+                                    onError={(e) => {
+                                        (e.target as HTMLImageElement).src = '/images/rinser.webp';
+                                    }}
                                 />
                             </div>
                             <div className="p-6 flex-1 flex flex-col">
                                 <div className="flex items-center gap-2 mb-3">
                                     <span className="text-xs font-bold text-primary px-2 py-1 bg-blue-50 rounded">
-                                        {post.category}
+                                        {post.category || "コラム"}
                                     </span>
                                     <span className="text-gray-400 text-xs">{post.date}</span>
                                 </div>

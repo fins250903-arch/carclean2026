@@ -1,5 +1,6 @@
 ---
 import { STORE_NAME } from '../../lib/site';
+import { regions } from '../../data/regions';
 
 interface Props {
   regionName: string;
@@ -10,27 +11,13 @@ interface Props {
 
 const { regionName, displayName, path } = Astro.props;
 
-const regionalLinks = [
-    { href: "/regions/hokkaido", label: "北海道" },
-    { href: "/regions/tokyo", label: "東京都" },
-    { href: "/regions/yokohama", label: "横浜市" },
-    { href: "/regions/nagoya", label: "名古屋市" },
-    { href: "/regions/osaka", label: "大阪府" },
-    { href: "/regions/kobe", label: "神戸市" },
-    { href: "/regions/fukuoka", label: "福岡市" },
-    { href: "/regions/miyagi", label: "宮城県" },
-    { href: "/regions/hiroshima", label: "広島県" },
-    { href: "/regions/kyoto", label: "京都市" },
-    { href: "/regions/saitama", label: "埼玉県" },
-    { href: "/regions/chiba", label: "千葉県" },
-    { href: "/regions/kanagawa", label: "神奈川県" },
-    { href: "/regions/shizuoka", label: "静岡県" },
-    { href: "/regions/okayama", label: "岡山県" },
-    { href: "/regions/nara", label: "奈良県" },
-    { href: "/regions/shiga", label: "滋賀県" },
-    { href: "/regions/wakayama", label: "和歌山県" },
-    { href: "/regions/saga", label: "佐賀県" }
-];
+// Filter out city-level links and unused regions mentioned by user
+// "北海道" "横浜市""名古屋市" "福岡市""広島県""京都市""岡山県" are to be excluded or standardized.
+// We'll use the standardized regions list.
+const regionalLinks = regions.map(r => ({
+    href: r.id === 'osaka' ? '/' : `/regions/${r.id}`,
+    label: r.name
+})).filter(l => !["北海道", "横浜市", "名古屋市", "福岡市", "京都市", "広島県", "岡山県"].includes(l.label));
 ---
 
 <section class="py-10 bg-white">
@@ -71,13 +58,6 @@ const regionalLinks = [
                     </a>
                 ))}
             </div>
-            {regionName === '大阪' && (
-                <div class="mt-4 inline-block bg-red-50 border border-red-200 rounded p-3">
-                    <p class="text-red-600 font-bold text-sm">
-                        ※大阪市につきましては「大阪市此花区のみ」の対応となります。誠に恐れ入りますが、他区への訪問は承っておりません。
-                    </p>
-                </div>
-            )}
         </div>
     </div>
 </section>

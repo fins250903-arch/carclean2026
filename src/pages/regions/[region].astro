@@ -55,7 +55,7 @@ export async function getStaticPaths() {
 const { regionName, niche, path } = Astro.props;
 const isTruck = niche === 'truck';
 
-const post = regionalPosts[regionName];
+const post = regionalPosts[regionName] || regionalPosts[regionName.replace('府', '').replace('県', '')];
 const displayName = post?.displayName || regionName;
 const questionnaireStructuredData = generateQuestionnaireJsonLd(regionName, displayName, path);
 const regionOverrides = {
@@ -102,12 +102,11 @@ const combinedJsonLd = [...jsonLdData, ...questionnaireStructuredData];
     
     <Campaign displayName={displayName} />
     <CTA />
-    <Reasons displayName={displayName} />
+    <Reasons displayName={displayName} regionName={regionName} />
     <Benefits />
     <Roadmap displayName={displayName} />
     
     <QuestionnaireTestimonials client:visible displayName={displayName} />
-    <Testimonials client:visible regionName={regionName} displayName={displayName} />
     <RegionalAchievements regionName={regionName} displayName={displayName} niche={niche} />
     <Targets />
     <Campaign displayName={displayName} />

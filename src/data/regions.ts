@@ -13,7 +13,7 @@ export const regions = [
   { id: 'tochigi', name: '栃木県' },
   { id: 'kyoto', name: '京都府' },
   { id: 'tokyo', name: '東京都' },
-  { id: 'osaka', name: '大阪' },
+  { id: 'osaka', name: '大阪府' },
   { id: 'gunma', name: '群馬県' },
   { id: 'shizuoka', name: '静岡県' },
   { id: 'nara', name: '奈良県' },

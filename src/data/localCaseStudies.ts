@@ -13,18 +13,18 @@ export interface CaseStudy {
 export const localCaseStudies: CaseStudy[] = [
   {
     id: "osaka-nbox-vomit",
-    region: "大阪",
+    region: "大阪府",
     city: "大阪市",
     niche: "car",
-    title: "古墳群の歴史に寄り添う、N-BOXの「空気再生」",
-    problem: "USJや万博公園へのドライブで発生した「お子様の急な嘔吐」や、中古車購入時の「加齢臭・タバコ臭」にお困りのケース。中古のN-BOXを手に入れたばかりのお客様から、「不快な臭いに満ちていては興ざめ」とのご相談でした。",
-    professionalInsight: "車内の消臭で大切なのは、汚れを「浮かす」ことです。私たちは、40度前後の温水と特殊なアルカリ洗剤を使い、シートの繊維一本一本を洗うような感覚で作業を進めました。加齢臭の元となる皮脂は、体温に近い温度で洗うのが一番落ちるんです。",
-    result: "分解後無害になる洗浄剤で、徹底洗浄。食い倒れの街・大阪のカーライフを清潔にサポートする、クリーンな空間が蘇りました。",
+    title: "N-BOXの「空気再生」：お子様の急な嘔吐への緊急対応",
+    problem: "お子様の急な嘔吐にお困りのケース。中古のN-BOXを手に入れたばかりのお客様から、「不快な臭いに満ちていては興ざめ」とのご相談でした。",
+    professionalInsight: "車内の消臭で大切なのは、汚れを「浮かす」ことです。40度前後の温水と特殊なアルカリ洗剤を使い、シートの繊維一本一本を洗うような感覚で作業を進めました。",
+    result: "分解後無害になる洗浄剤で徹底洗浄。クリーンな空間が蘇りました。",
     image: "/images/cases/nbox_odor_3.webp"
   },
   {
     id: "osaka-sienta-vomit",
-    region: "大阪",
+    region: "大阪府",
     city: "箕面市",
     niche: "car",
     title: "シエンタの嘔吐汚れを徹底除菌！車酔いの苦い思い出を消し去る事例",
@@ -34,14 +34,14 @@ export const localCaseStudies: CaseStudy[] = [
     image: "/images/cases/sienta_vomit_5.webp"
   },
   {
-    id: "osaka-truck-tobacco",
-    region: "大阪",
+    id: "osaka-car-tobacco",
+    region: "大阪府",
     city: "堺市",
-    niche: "truck",
+    niche: "car",
     title: "長年のヤニ汚れとペット臭の複合臭を解消",
     problem: "ワンちゃんをよく乗せる営業車。長年のタバコのヤニ汚れと犬の獣臭が混ざり、人を乗せられない状態でした。",
     professionalInsight: "動物の脂分とタバコのタールは性質が異なるため、それぞれに特化した酵素系クリーナーを2段階で塗布。汚れを分解してから温水で一気に吸い上げる工法を採用しました。",
     result: "染み込んでいた茶色い汚水をすべて回収し、新車に近いクリアな空気に戻りました。",
-    image: "/images/cases/truck_10t_cabin.png"
+    image: "/images/rinser.webp"
   }
 ];

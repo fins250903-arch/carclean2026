@@ -1,21 +1,24 @@
 ---
 interface Props {
   displayName: string;
+  regionName: string;
 }
 
-const { displayName } = Astro.props;
+const { displayName, regionName } = Astro.props;
+
+const isSpecialRegion = regionName === '福岡' || regionName === '沖縄' || regionName === '福岡県' || regionName === '沖縄県';
 
 const reasons = [
     {
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-truck"><path d="M14 18V6a2 2 0 0 0-2-2H4a2 2 0 0 0-2 2v11a1 1 0 0 0 1 1h2"/><path d="M15 18H9"/><path d="M19 18h2a1 1 0 0 0 1-1v-3.65a2 2 0 0 0-.66-1.41l-3.22-3.12a2 2 0 0 0-1.41-.57H14"/><circle cx="7" cy="18" r="2"/><circle cx="17" cy="18" r="2"/></svg>',
         title: "圧倒的スピード対応",
-        desc: "すぐ対応で到着。部分クリーニングなら作業も1時間で完了。",
+        desc: "すぐ対応で到着。車内クリーニング専門店だから、スピードと質の高さを両立。",
         color: "bg-blue-500"
     },
     {
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-award"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>',
         title: "100℃スチームで根本除去",
-        desc: "ただの消臭ではなく、高温スチームと業務用のリンサーで、シート内部の汚れごと吸い出します。",
+        desc: "ただの消臭ではなく、高温スチームでの「シート洗浄」で、内部の汚れごと吸い出します。",
         color: "bg-orange-500"
     },
     {
@@ -26,8 +29,10 @@ const reasons = [
     },
     {
         icon: '<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-clock"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>',
-        title: "場所を選ばず電源不要",
-        desc: "発電機を持参しますので、ドアが開けられるスペースがあればどこでも作業可能です。",
+        title: isSpecialRegion ? "電源・水道をお借りします" : "場所を選ばず電源不要",
+        desc: isSpecialRegion 
+            ? "電源（20mの電源コードを持参）と水道が必要です。" 
+            : "発電機を持参しますので、ドアが開けられるスペースがあればどこでも作業可能です。",
         color: "bg-purple-500"
     },
     {
@@ -53,16 +58,14 @@ const reasons = [
         </h2>
 
         <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6 mb-8">
-            {reasons.map((reason, index) => (
+            {reasons.map((reason) => (
                 <div class="bg-white p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow border border-gray-100 flex flex-col items-center text-center">
                     <div class={`${reason.color} text-white w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-md`}>
                         <Fragment set:html={reason.icon} />
                     </div>
                     <h3 class="text-xl font-bold text-gray-800 mb-2">{reason.title}</h3>
                     <p class="text-gray-600 text-sm leading-relaxed mobile-text text-left">
-                        {index === 0 ? "すぐ対応で到着。車内クリーニング専門店だから、スピードと質の高さを両立。" :
-                            index === 1 ? "ただの消臭ではなく、高温スチームでの「シート洗浄」で、内部の汚れごと吸い出します。" :
-                                reason.desc}
+                        {reason.desc}
                     </p>
                 </div>
             ))}
