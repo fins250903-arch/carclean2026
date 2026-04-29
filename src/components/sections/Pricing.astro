@@ -8,56 +8,109 @@ const { regionName, niche = 'car' } = Astro.props;
 const isTruck = niche === 'truck';
 
 const carPricing = [
-    { name: "軽自動車・軽SUV", price: "22,000", detail: "4人乗り以下。シート洗浄・床面洗浄セット。消臭追加：+3,000円" },
-    { name: "普通車(3/5ナンバー)", price: "28,000", detail: "5人乗り以下。シート洗浄・床面洗浄セット。消臭追加：+4,000円" },
-    { name: "大型車・ミニバン", price: "36,000", detail: "6人乗り以上。シート洗浄・床面洗浄セット。消臭追加：+5,000円" },
-    { name: "座席シート単体", price: "18,000", detail: "1脚徹底洗浄。消臭追加：+7,000円" }
+    { 
+        category: "車種別・基本クリーニング（全席シート洗浄＋フロア清掃）",
+        items: [
+            { name: "軽自動車", price: "22,000", detail: "N-BOX, タント, ムーヴ, ワゴンR等" },
+            { name: "コンパクトカー", price: "25,000", detail: "アクア, フィット, ヤリス, ノート等" },
+            { name: "セダン・ステーションワゴン", price: "28,000", detail: "プリウス, クラウン, カローラ, レヴォーグ等" },
+            { name: "SUV・ミニバン(2列)", price: "32,000", detail: "CX-5, ヴェゼル, フリード, シエンタ, ハリアー等" },
+            { name: "大型ミニバン・SUV(3列)", price: "38,000", detail: "アルファード, ヴォクシー, セレナ, ランドクルーザー等" }
+        ]
+    },
+    {
+        category: "緊急トラブル・部分清掃オプション",
+        items: [
+            { name: "嘔吐（ゲロ）清掃・除菌", price: "18,000", detail: "130℃スチーム＋リンサー洗浄＋強アルカリ除菌" },
+            { name: "灯油こぼし・特殊消臭", price: "25,000", detail: "灯油専用中和剤＋繰り返し洗浄（※重度は別途見積り）" },
+            { name: "ペット粗相・獣臭除去", price: "18,000", detail: "酵素分解洗浄＋ペット専用消臭施工" },
+            { name: "タバコ消臭フルパック", price: "22,000", detail: "天井・壁面・エアコン・全席シートのトータル洗浄" }
+        ]
+    }
 ];
 
 const truckPricing = [
-    { name: "トラックキャビン", price: "35,000", detail: "キャビン全体・除菌。10t車目安。ベッド部は別途。" },
-    { name: "後部座席のみ", price: "22,000", detail: "徹底洗浄。消臭追加：+7,000円" },
-    { name: "フロア床(前席のみ)", price: "9,000", detail: "徹底洗浄。消臭追加：+7,000円" },
-    { name: "エアコン内部(簡易)", price: "10,000", detail: "臭いの元をリフレッシュ" }
+    {
+        category: "トラックキャビン清掃パック",
+        items: [
+            { name: "小型トラック (2t)", price: "25,000", detail: "キャビン全体清掃・除菌" },
+            { name: "中型トラック (4t)", price: "30,000", detail: "キャビン全体清掃・除菌" },
+            { name: "大型トラック (10t)", price: "35,000", detail: "キャビン全体・除菌" },
+            { name: "ベッド部丸洗い", price: "8,000", detail: "マットレス洗浄・消臭追加" }
+        ]
+    }
 ];
 
-const pricing = isTruck ? truckPricing : carPricing;
+const pricingCategories = isTruck ? truckPricing : carPricing;
 ---
 
-<section class="py-10 bg-white" id="pricing">
-    <div class="container mx-auto px-8">
-        <div class="text-center mb-12">
-            <h2 class="text-3xl font-bold text-gray-800 mb-4">料金プラン</h2>
-            <p class="text-gray-600">出張費込みの明快な料金体系です。</p>
+<section class="py-20 bg-white" id="pricing">
+    <div class="container mx-auto px-8 max-w-6xl">
+        <div class="text-center mb-16">
+            <h2 class="text-4xl md:text-7xl font-black text-gray-900 mb-6">料金プラン</h2>
+            <p class="text-xl md:text-2xl text-gray-600 font-bold">
+                {regionName}エリアは出張費無料！<br class="md:hidden" />
+                プロの機材と技術で、車内の悩みを根本解決します。
+            </p>
         </div>
 
-        <div class="max-w-4xl mx-auto grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {pricing.map((plan) => (
-                <div class="bg-gray-50 rounded-2xl p-6 border border-gray-100 flex flex-col text-center">
-                    <h3 class="font-bold text-gray-800 mb-2">{plan.name}</h3>
-                    <div class="mb-4">
-                        <span class="text-sm text-gray-500">税込</span>
-                        <span class="text-2xl font-black text-primary ml-1">{plan.price}</span>
-                        {plan.price !== "別途お見積り" && <span class="text-sm text-primary">円〜</span>}
+        <div class="space-y-16">
+            {pricingCategories.map((category) => (
+                <div class="bg-gray-50 rounded-[40px] p-8 md:p-16 border border-gray-200 shadow-sm">
+                    <h3 class="text-3xl md:text-4xl font-black text-blue-900 mb-10 flex items-center gap-4">
+                        <span class="w-2 h-12 bg-primary rounded-full"></span>
+                        {category.category}
+                    </h3>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-left">
+                            <thead class="hidden md:table-header-group">
+                                <tr class="border-b-4 border-gray-300">
+                                    <th class="py-6 text-gray-500 font-black text-lg">車種・サービス</th>
+                                    <th class="py-6 text-gray-500 font-black text-lg">料金 (税込)</th>
+                                    <th class="py-6 text-gray-500 font-black text-lg">主な対象・内容</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y-2 divide-gray-200">
+                                {category.items.map((item) => (
+                                    <tr class="flex flex-col md:table-row py-8 md:py-0">
+                                        <td class="py-6 font-black text-gray-800 text-2xl md:text-xl">
+                                            {item.name}
+                                        </td>
+                                        <td class="py-4 md:py-6">
+                                            <div class="flex items-baseline">
+                                                <span class="text-sm font-bold text-primary mr-1">税込</span>
+                                                <span class="text-4xl md:text-5xl font-black text-primary">{item.price}</span>
+                                                <span class="text-lg font-bold text-primary ml-1">円〜</span>
+                                            </div>
+                                        </td>
+                                        <td class="py-4 md:py-6 text-gray-600 text-lg leading-relaxed">
+                                            {item.detail}
+                                        </td>
+                                    </tr>
+                                ))}
+                            </tbody>
+                        </table>
                     </div>
-                    <p class="text-xs text-gray-500 leading-relaxed mb-6 flex-1">
-                        {plan.detail}
-                    </p>
-                    <a href="#contact" class="bg-white border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-2 px-4 rounded-full text-sm transition-all shadow-sm">
-                        詳しく相談する
-                    </a>
                 </div>
             ))}
         </div>
         
-        <div class="mt-12 bg-blue-50 border border-blue-100 rounded-2xl p-6 max-w-2xl mx-auto text-center">
-            <p class="text-sm text-gray-700 font-bold mb-2">
-                【{regionName}エリア限定】
-            </p>
-            <p class="text-gray-600 text-sm">
-                現在、キャンペーンにつき出張料無料にて承っております。<br />
-                （※一部遠方地域を除く。詳細はお問い合わせください）
-            </p>
+        <div class="mt-20 bg-gradient-to-br from-blue-600 to-blue-800 rounded-[40px] p-10 md:p-20 text-white shadow-2xl relative overflow-hidden">
+            <div class="relative z-10 text-center">
+                <h3 class="text-3xl md:text-5xl font-black mb-6">【{regionName}のお客様へ】</h3>
+                <p class="text-xl md:text-3xl font-bold leading-relaxed mb-10">
+                    現在、キャンペーンにつき<span class="text-yellow-400 underline decoration-4">出張料無料</span>にて承っております。<br />
+                    「今すぐどうにかしたい」トラブル、プロの特急便にお任せください！
+                </p>
+                <div class="flex flex-col sm:flex-row justify-center gap-6">
+                    <a href="https://lin.ee/Xs8Orp2" class="bg-[#06C755] text-white font-black py-6 px-12 rounded-full text-2xl shadow-xl hover:scale-105 transition-transform flex items-center justify-center gap-3">
+                         LINEで無料見積もり
+                    </a>
+                </div>
+            </div>
+            {/* Decoration */}
+            <div class="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-64 h-64 bg-white/10 rounded-full blur-3xl"></div>
+            <div class="absolute bottom-0 left-0 translate-y-1/2 -translate-x-1/2 w-96 h-96 bg-blue-400/20 rounded-full blur-3xl"></div>
         </div>
     </div>
 </section>

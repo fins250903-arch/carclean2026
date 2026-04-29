@@ -11,30 +11,39 @@ export interface Testimonial {
 export const questionnaireTestimonials: Testimonial[] = [
   {
     id: "testimonial-01",
-    name: "依頼者様 (20代女性)",
+    name: "依頼者様 (30代男性)",
     region: "大阪市",
     service: "嘔吐クリーニング",
-    title: "エアコンの臭いまで消えて感動",
-    comment: "子どもが車で嘔吐してしまい、クリーニングを依頼。想像以上に丁寧に洗ってもらい、エアコンからの臭いも完全になくなって感動しました。",
-    image: "/images/voice_family.webp"
+    title: "子どもが酔ってしまって...",
+    comment: "子どもが車内で酔ってしまい、急ぎでお願いしました。手書きのアンケートにも書きましたが、本当に綺麗になって助かりました。",
+    image: "/images/questionnaires/kodomo.jpg"
   },
   {
     id: "testimonial-02",
-    name: "依頼者様 (30代男性)",
+    name: "依頼者様 (40代女性)",
     region: "箕面市",
     service: "灯油消臭",
-    title: "灯油の臭いが気にならない程度に",
-    comment: "新車に灯油をこぼし、自分でやっていたら悪循環に。プロに相談し、洗浄してもらった結果、ほとんど匂いが気にならない程度まで綺麗になりました。",
-    image: "/images/voice_young_man.webp"
+    title: "灯油をこぼして絶望してました",
+    comment: "ポリタンクを倒してしまい、車内が灯油臭くて乗れない状態に。洗浄後、驚くほど臭いが消えました。",
+    image: "/images/questionnaires/touyu.jpg"
   },
   {
     id: "testimonial-03",
-    name: "依頼者様 (40代女性)",
+    name: "依頼者様 (50代男性)",
     region: "堺市",
-    service: "タバコ消臭",
-    title: "中古車のタバコ臭が消えました",
-    comment: "中古で購入した車のタバコのニオイが微かに残っているのが気になっていました。相談したところ、本当にニオイが消えていたので大満足です。",
-    image: "/images/voice_businessman.webp"
+    service: "中古車消臭",
+    title: "タバコの臭いが気にならなくなった",
+    comment: "中古で購入した車のタバコ臭が気になっていましたが、プロに頼んで正解でした。アンケートの通り満足です。",
+    image: "/images/questionnaires/used2.jpg"
+  },
+  {
+    id: "testimonial-04",
+    name: "依頼者様 (20代女性)",
+    region: "豊中市",
+    service: "ペット粗相",
+    title: "犬の粗相もきれいに",
+    comment: "ワンちゃんを病院に連れて行く途中で粗相してしまい...。すぐに来ていただけて本当に助かりました。",
+    image: "/images/questionnaires/dogsit.jpg"
   }
 ];
 

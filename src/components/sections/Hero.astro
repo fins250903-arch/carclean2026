@@ -10,84 +10,91 @@ interface Props {
 const { regionName, displayName, niche = 'car' } = Astro.props;
 const isTruck = niche === 'truck';
 
-const title = isTruck 
+const subtitle = isTruck 
     ? `${displayName}トラックキャビン清掃専門店/キャビン洗浄`
     : `${displayName}車内クリーニング専門店/シート洗浄`;
-
-const descriptionTitle = isTruck
-    ? `【トラック清掃 特急便】とは、最短即日で稼働拠点へ伺う「大型トラック・バス専用の出張キャビン洗浄店」です。`
-    : `【車内清掃 特急便】とは、最短即日でご自宅へ伺う「車内クリーニング・消臭の出張専門店」です。`;
-
-const descriptionBody = isTruck
-    ? `業務用100℃スチームと高圧リンサーを用い、長距離走行で蓄積した「タバコ・皮脂・カビ臭・飲食物の汚れ」を徹底除去。ドライバーが快適に過ごせる「第2の自宅」を清潔に蘇らせます。`
-    : `業務用100℃スチームと高圧リンサーを用い、自分では落とせない「嘔吐・灯油・ペット臭・カビ」などの頑固な汚れと臭いを根こそぎ除去。施工後すぐに使える状態まで仕上げるプロの洗浄サービスを提供します。`;
 
 const fvImage = isTruck ? "/images/truck-fv.png" : "/images/fv_change_v2.png";
 ---
 
-<section class="relative w-full min-h-screen md:h-[90vh] md:min-h-[700px] flex items-center justify-center overflow-hidden bg-black">
+<section class="relative w-full min-h-screen md:h-[95vh] flex items-center bg-white overflow-hidden">
     <div class="absolute inset-0 w-full h-full z-0">
         <img
             src={fvImage}
             alt={`${displayName}対応 ${STORE_NAME}`}
-            class="w-full h-full object-cover object-[center_bottom] md:object-center opacity-80"
+            class="w-full h-full object-cover object-[center_bottom] md:object-right opacity-90"
         />
-        <div class="absolute inset-0 bg-white/20 z-10"></div>
+        <div class="absolute inset-0 bg-gradient-to-r from-white via-white/80 to-transparent z-10"></div>
     </div>
 
     <div class="container mx-auto px-8 md:px-16 z-20 relative">
-        <div class="max-w-4xl">
-            <p class="text-xl md:text-3xl font-black text-red-600 mb-4 bg-white/90 inline-block px-4 py-1 rounded-sm shadow-sm rotate-[-1deg]">
-                {isTruck ? "キャビンが臭くて眠れませんか？今すぐリフレッシュ！" : "ディーラーで5日待てますか？絶対ムリ！"}
+        <div class="max-w-3xl">
+            {/* 1. 小見出し */}
+            <p class="text-lg md:text-2xl font-bold text-gray-800 mb-2">
+                {subtitle}
             </p>
-            <h1 class="text-5xl md:text-7xl lg:text-8xl font-black text-blue-900 leading-tight mb-6 drop-shadow-sm">
-                {title}
-                <span class="block text-primary mt-2">早急に解決！</span>
+
+            {/* 2. メインキャッチコピー */}
+            <h1 class="text-6xl md:text-8xl lg:text-9xl font-black text-blue-900 leading-tight mb-4 tracking-tighter">
+                早急に解決！
             </h1>
-            <p class="text-lg md:text-2xl font-bold text-gray-800 mb-8">
-                {isTruck ? "その場に急行し、キャビンの臭い消し・汚れを完全除去。" : "その場に急行し、車内の臭い消し・汚れを完全除去。"}
+
+            {/* 3. サブキャッチ */}
+            <p class="text-2xl md:text-4xl font-bold text-gray-700 mb-8">
+                {displayName}の車内クリーニング・消臭洗浄
             </p>
             
-            <div class="bg-yellow-50 border-2 border-yellow-400 px-8 py-6 rounded-xl shadow-lg mb-4 md:mb-6 inline-block text-left w-full max-w-md">
-                <p class="text-sm md:text-base font-bold text-gray-800">
+            {/* 4. キャンペーンボックス（黄色） */}
+            <div class="bg-yellow-100 border-4 border-yellow-400 p-6 md:p-8 rounded-3xl shadow-xl mb-6 inline-block w-full max-w-xl">
+                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
                     今なら、通常2,000円の
                 </p>
-                <p class="text-xl md:text-3xl font-black text-red-600 my-1 animate-pulse">
+                <p class="text-4xl md:text-6xl font-black text-red-600 animate-pulse">
                     抗菌コート 無料！
-                </p>
-                <p class="text-xs md:text-sm font-bold text-gray-800 leading-relaxed">
-                    クリーニング後のきれいな状態を長持ちさせ、菌の繁殖を抑えます。
                 </p>
             </div>
 
+            {/* 5. 緊急トラブルボックス（白背景・赤枠） */}
+            <div class="bg-white border-4 border-red-500 p-6 md:p-8 rounded-3xl shadow-2xl mb-10 w-full max-w-xl">
+                <p class="text-xl md:text-2xl font-bold text-gray-800 mb-2">
+                    ディーラーで5日待てますか？
+                </p>
+                <p class="text-5xl md:text-7xl font-black text-red-600">
+                    絶対ムリ！
+                </p>
+            </div>
 
-            <div class="flex flex-col gap-3 items-center sm:items-start w-full sm:w-auto mb-6">
+            {/* 6. CTAボタン */}
+            <div class="flex flex-col sm:flex-row gap-4 mb-8">
                 <a
                     href="https://lin.ee/Xs8Orp2"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="bg-green-500 hover:bg-green-600 text-white font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-xl text-lg md:text-xl w-full sm:w-auto transition-transform hover:scale-105 text-center"
+                    class="bg-[#06C755] hover:bg-[#05a346] text-white font-black py-5 px-10 rounded-full shadow-2xl text-2xl md:text-3xl transition-transform hover:scale-105 text-center flex items-center justify-center gap-3"
                 >
-                    LINEで今すぐ見積もり
+                    <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24" fill="currentColor" class="lucide lucide-message-circle"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></svg>
+                    LINEで見積もり
                 </a>
                 <a
                     href="https://www.instagram.com/carinterierclean/"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="bg-[#C13584] hover:bg-[#833AB4] text-white font-bold py-3 md:py-4 px-6 md:px-8 rounded-full shadow-xl text-lg md:text-xl w-full sm:w-auto transition-transform hover:scale-105 text-center flex items-center justify-center gap-2"
+                    class="bg-gradient-to-tr from-[#f9ce34] via-[#ee2a7b] to-[#6228d7] hover:opacity-90 text-white font-black py-5 px-10 rounded-full shadow-2xl text-2xl md:text-3xl transition-transform hover:scale-105 text-center flex items-center justify-center gap-3"
                 >
-                    <span>📸</span> インスタDMで相談
+                    📸 インスタDM相談
                 </a>
             </div>
 
-            <div class="bg-white/95 p-6 md:p-8 rounded-xl shadow-md border-l-8 border-primary max-w-xl">
-                <p class="text-gray-800 text-base md:text-lg font-bold leading-relaxed">
-                    {descriptionTitle}
-                </p>
-                <p class="text-gray-700 text-sm md:text-base mt-2 leading-relaxed">
-                    {descriptionBody}
-                </p>
-            </div>
+            {/* 7. 補足テキスト */}
+            <p class="text-xl md:text-2xl font-black text-gray-800 leading-relaxed bg-white/60 inline-block px-4 py-2 rounded-lg">
+                嘔吐・灯油こぼしの緊急トラブル <span class="text-red-600 underline decoration-4">すぐ対応</span> 駆けつけます
+            </p>
         </div>
     </div>
 </section>
+
+<style>
+    h1 {
+        text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+    }
+</style>

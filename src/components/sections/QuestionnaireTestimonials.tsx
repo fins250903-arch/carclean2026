@@ -7,48 +7,54 @@ export default function QuestionnaireTestimonials({ displayName: propDisplayName
     const displayName = propDisplayName || context.displayName;
 
     return (
-        <section className="bg-amber-50 py-10">
+        <section className="bg-amber-50 py-16">
             <div className="container mx-auto px-8">
-                <div className="text-center mb-8">
-                    <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-4">
-                        お客様アンケートの結果
+                <div className="text-center mb-12">
+                    <h2 className="text-3xl md:text-5xl font-black text-gray-900 mb-6">
+                        お客様の声
                     </h2>
-                    <p className="text-gray-600 max-w-2xl mx-auto">
-                        施工後にいただいたアンケートの一部をご紹介します。{displayName}周辺のお客様からも多くの喜びの声をいただいております。
-                    </p>
+                    <div className="bg-white p-6 md:p-10 rounded-3xl shadow-sm border-2 border-amber-200 max-w-4xl mx-auto mb-10">
+                        <h3 className="text-xl md:text-2xl font-bold text-amber-800 mb-4">
+                            ご利用頂いたお客様のアンケート
+                        </h3>
+                        <p className="text-gray-700 text-lg leading-relaxed mb-4">
+                            実際にお客様にご記入いただいたアンケートをそのまま掲載しています。<br className="hidden md:block" />
+                            手書きの声と一緒に内容をご確認ください。
+                        </p>
+                    </div>
                 </div>
 
-                <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div className="grid md:grid-cols-2 gap-10">
                     {questionnaireTestimonials.map((item, index) => (
-                        <div key={index} className="bg-white p-6 rounded-2xl shadow-md border border-amber-100 flex flex-col">
-                            <div className="mb-4">
+                        <div key={index} className="bg-white rounded-3xl shadow-xl overflow-hidden border border-amber-100 flex flex-col md:flex-row h-full">
+                            <div className="md:w-1/2 relative bg-gray-100">
                                 <img
                                     src={item.image}
-                                    alt={`${item.name}様のアンケート`}
-                                    className="w-full h-auto rounded-lg shadow-sm border border-gray-100"
+                                    alt={`${item.name}様のアンケート原本`}
+                                    className="w-full h-full object-contain p-4 md:p-2"
                                 />
+                                <div className="absolute top-2 left-2 bg-amber-500 text-white text-xs font-bold px-2 py-1 rounded">
+                                    アンケート原本
+                                </div>
                             </div>
-                            <div className="flex-1">
-                                <div className="flex items-center gap-2 mb-2">
+                            <div className="md:w-1/2 p-6 flex flex-col justify-center">
+                                <div className="flex items-center gap-2 mb-3">
                                     <span className="bg-amber-100 text-amber-800 text-xs font-bold px-2 py-1 rounded">
                                         {item.service}
                                     </span>
-                                    <span className="text-gray-500 text-xs">{item.region} {item.name}様</span>
+                                    <span className="text-gray-500 text-xs">{item.name}</span>
                                 </div>
-                                <h3 className="text-lg font-bold text-gray-800 mb-2 italic">
+                                <h4 className="text-xl font-bold text-gray-800 mb-4">
                                     「{item.title}」
-                                </h3>
-                                <p className="text-gray-600 text-sm leading-relaxed">
+                                </h4>
+                                <p className="text-gray-600 text-sm leading-relaxed mb-4 flex-1">
                                     {item.comment}
                                 </p>
-                            </div>
-                            <div className="mt-4 pt-4 border-t border-amber-50 flex items-center justify-between">
-                                <div className="flex text-amber-400">
+                                <div className="flex text-amber-400 text-lg">
                                     {[...Array(5)].map((_, i) => (
                                         <span key={i}>★</span>
                                     ))}
                                 </div>
-                                <span className="text-xs font-bold text-amber-600">満足度 100%</span>
                             </div>
                         </div>
                     ))}
