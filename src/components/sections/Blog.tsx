@@ -51,7 +51,7 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
             date: "2024.03.14",
             image: "/images/rinser.webp",
             category: "消臭ノウハウ",
-            url: "https://carinteriorcleaning.jp/blog/2026/03/14/tabakosmells/",
+            url: "https://carinteriorcleaning.jp/blog/2026/03/12/100kinnioi/",
             niche: 'car'
         }
     ];

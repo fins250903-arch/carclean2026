@@ -14,12 +14,14 @@ const isTruck = niche === 'truck';
 
 // 相互リンク先URLを構築
 let targetLink = '';
-if (path === '/' || path === '') {
+const cleanPath = path.endsWith('/') ? path.slice(0, -1) : path;
+
+if (cleanPath === '/' || cleanPath === '') {
     targetLink = isTruck ? '/' : '/regions/osaka-truck';
 } else {
     targetLink = isTruck
-        ? path.replace(/-truck$/, '')
-        : `${path}-truck`;
+        ? cleanPath.replace(/-truck$/, '')
+        : `${cleanPath}-truck`;
 }
 
 const targetImage = isTruck ? '/images/fv_change_v2.png' : '/images/truck-fv.png';
