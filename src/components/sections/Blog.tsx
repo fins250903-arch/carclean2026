@@ -111,7 +111,7 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
                         href="https://carinteriorcleaning.jp/blog/" 
                         className="inline-block border-2 border-primary text-primary hover:bg-primary hover:text-white font-bold py-3 px-8 rounded-full transition-all"
                     >
-                        ブログ記事一覧を見る
+                        最新ブログ一覧はこちら →
                     </a>
                 </div>
             </div>

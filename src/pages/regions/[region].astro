@@ -26,6 +26,7 @@ import Profile from '../../components/sections/Profile.astro';
 import Expertise from '../../components/sections/Expertise.astro';
 import Pricing from '../../components/sections/Pricing.astro';
 import Closing from '../../components/sections/Closing.astro';
+import ServiceMutualLink from '../../components/sections/ServiceMutualLink.astro';
 
 // React Components
 import { RegionProvider } from '../../lib/RegionContext';
@@ -121,6 +122,7 @@ const combinedJsonLd = [...jsonLdData, ...questionnaireStructuredData];
     <CTA />
     <FAQ niche={niche} />
     <Blog client:visible regionName={regionName} displayName={displayName} />
+    <ServiceMutualLink regionName={regionName} displayName={displayName} niche={niche} path={path} />
     <ContactForm client:visible regionName={regionName} />
     <Closing regionName={regionName} displayName={displayName} niche={niche} path={path} />
     <FloatingCTA client:visible />
