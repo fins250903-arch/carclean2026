@@ -17,6 +17,7 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
         category: string;
         url?: string;
         regionName?: string;
+        niche?: 'car' | 'truck' | 'coating';
     };
 
     const [selectedPost, setSelectedPost] = useState<BlogPost | null>(null);
@@ -27,10 +28,11 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
             id: 1,
             title: "車内嘔吐の正しい対処法と、プロの除菌技術",
             excerpt: "もし車内で嘔吐してしまったら…被害を最小限に抑えるための応急処置と、プロが行う徹底洗浄の内容を解説します。",
-            date: "2024.03.15",
+            date: "2024.04.19",
             image: "/images/cases/sienta_vomit_5.webp",
             category: "ノウハウ",
-            url: "https://carinteriorcleaning.jp/blog/outo-syori/"
+            url: "https://carinteriorcleaning.jp/blog/2026/04/19/childouto/",
+            niche: 'car'
         },
         {
             id: 2,
@@ -39,13 +41,24 @@ export default function Blog({ regionName: propRegionName, displayName: propDisp
             date: "2024.03.10",
             image: "/images/truck-fv.png",
             category: "トラック清掃",
-            url: "https://carinteriorcleaning.jp/blog/truck-cabin-clean/"
+            url: "https://carinteriorcleaning.jp/regions/osaka-truck/",
+            niche: 'truck'
+        },
+        {
+            id: 3,
+            title: "100均3品で解決！中古車のタバコ臭を業者並みに消す超簡単術",
+            excerpt: "中古車特有のタバコの臭い。100円ショップで手に入る身近なアイテムを使って、プロに近い消臭効果を得る裏技を公開。",
+            date: "2024.03.14",
+            image: "/images/rinser.webp",
+            category: "消臭ノウハウ",
+            url: "https://carinteriorcleaning.jp/blog/2026/03/14/tabakosmells/",
+            niche: 'car'
         }
     ];
 
     const displayPosts = [
         ...Object.values(regionalPosts).filter(post => post.displayName === displayName || post.title.includes(regionName.replace('府', '').replace('県', ''))),
-        ...basePosts.map(post => ({ ...post, regionName: displayName }))
+        ...basePosts.filter(post => post.niche === context.niche).map(post => ({ ...post, regionName: displayName }))
     ];
 
     const handlePostClick = (post: BlogPost) => {
