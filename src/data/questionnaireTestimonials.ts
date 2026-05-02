@@ -1,3 +1,5 @@
+import { SITE_URL } from '@/lib/site';
+
 export interface Testimonial {
   id: string;
   name: string;
@@ -54,7 +56,7 @@ export const generateQuestionnaireJsonLd = (regionName: string, displayName: str
     "itemReviewed": {
       "@type": "LocalBusiness",
       "name": `車内清掃 特急便 ${displayName}`,
-      "image": "https://carinteriorcleaning.jp/images/fv.png",
+      "image": `${SITE_URL}/images/fv.png`,
       "telephone": "070-8428-0866",
       "address": {
         "@type": "PostalAddress",

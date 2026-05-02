@@ -80,7 +80,7 @@ export interface Metadata {
 
 
 
-import { faqData, truckFaqData, flowData, truckFlowData, serviceData } from '@/data/seoData';
+import { faqData, truckFaqData, flowData, truckFlowData, serviceData, truckServiceData } from '@/data/seoData';
 
 import { INSTAGRAM_URL, LINE_URL, SITE_URL, STORE_NAME } from '@/lib/site';
 
@@ -153,33 +153,7 @@ function getDynamicRating(regionName: string) {
 
 }
 
-// Generate Review schemas from testimonials
-function generateReviewSchemas(regionName: string, url: string) {
-    const regionTestimonials = questionnaireTestimonials.filter(t => 
-        !regionName || t.region.includes(regionName) || regionName.includes(t.region)
-    );
-    
-    // 最大3件のレビューを取得
-    const reviews = regionTestimonials.slice(0, 3).map((testimonial, index) => ({
-        '@type': 'Review',
-        '@id': `${url}#review-${index}`,
-        reviewRating: {
-            '@type': 'Rating',
-            ratingValue: '5',
-            bestRating: '5',
-            worstRating: '1'
-        },
-        author: {
-            '@type': 'Person',
-            name: testimonial.name
-        },
-        reviewBody: testimonial.comment,
-        datePublished: new Date(Date.now() - (index * 7 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0], // 1週間ごと
-        inLanguage: 'ja-JP'
-    }));
 
-    return reviews;
-}
 
 
 
@@ -483,7 +457,7 @@ export const generateJsonLd = (regionName: string, path: string = '', regionOver
 
             ratingValue: getDynamicRating(regionName).ratingValue,
 
-            reviewCount: getDynamicRating(regionName).reviewCount,
+            reviewCount: questionnaireTestimonials.length.toString(),
 
             bestRating: '5',
 
@@ -491,13 +465,43 @@ export const generateJsonLd = (regionName: string, path: string = '', regionOver
 
         },
 
+        review: questionnaireTestimonials.map((t, index) => ({
+
+            '@type': 'Review',
+
+            reviewRating: {
+
+                '@type': 'Rating',
+
+                ratingValue: '5',
+
+                bestRating: '5',
+
+                worstRating: '1',
+
+            },
+
+            author: {
+
+                '@type': 'Person',
+
+                name: t.name,
+
+            },
+
+            reviewBody: t.comment,
+
+            datePublished: new Date(Date.now() - (index * 14 * 24 * 60 * 60 * 1000)).toISOString().split('T')[0],
+
+        })),
+
         hasOfferCatalog: {
 
             '@type': 'OfferCatalog',
 
             name: isTruck ? 'トラック清掃メニュー' : '車内クリーニングメニュー',
 
-            itemListElement: (isTruck ? serviceData.slice(0,0) : serviceData).map(service => ({
+            itemListElement: (isTruck ? truckServiceData : serviceData).map(service => ({
 
                 '@type': 'Offer',
 

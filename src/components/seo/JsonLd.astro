@@ -1,11 +1,23 @@
 ---
 interface Props {
-  data: any[];
+  data: Record<string, unknown>[];
 }
 
 const { data } = Astro.props;
+
+// 各スキーマから @context を除去して @graph に統合（Google推奨形式）
+const graph = data.map((schema) => {
+  if (typeof schema === 'object' && schema !== null) {
+    const { '@context': _, ...rest } = schema as Record<string, unknown>;
+    return rest;
+  }
+  return schema;
+});
+
+const schemaOutput = JSON.stringify({
+  '@context': 'https://schema.org',
+  '@graph': graph,
+});
 ---
 
-{data.map((schema) => (
-  <script type="application/ld+json" set:html={JSON.stringify(schema)} />
-))}
+<script type="application/ld+json" set:html={schemaOutput} />
