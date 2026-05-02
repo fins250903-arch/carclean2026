@@ -15,7 +15,7 @@ export const regionSlugMap: Record<string, string> = {
     '沖縄県': 'okinawa',
     '福岡県': 'fukuoka',
     '兵庫県': 'hyogo',
-    '大阪': 'osaka',
+    '大阪府': 'osaka',
     '愛知県': 'aichi',
     '茨城県': 'ibaraki',
     '千葉県': 'chiba',
@@ -129,7 +129,7 @@ export const regionAreaData: Record<string, RegionAreaConfig> = {
         ],
         ctaText: '＼愛知県全域対応！／ 無料見積もり・お問い合わせはこちら',
     },
-    '大阪': {
+    '大阪府': {
         headline: '大阪府内ならどこでも！最短当日お伺いします',
         reassurance: '「自分の家は対応してくれるかな？」という方もご安心ください。当店は大阪府内全域をカバー。ご自宅や職場まで、専用機材を積んで迅速に出張いたします！',
         areas: [

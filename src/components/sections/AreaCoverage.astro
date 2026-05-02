@@ -1,40 +1,54 @@
 ---
+import { regionAreaData } from '../../data/regionAreaData';
+
 interface Props {
   regionName: string;
 }
 
 const { regionName } = Astro.props;
 
-const areas = [
-    "大阪市", "堺市", "能勢町", "豊能町", "池田市", "箕面市", "豊中市", "茨木市", "高槻市", "島本町", 
-    "吹田市", "摂津市", "枚方市", "交野市", "寝屋川市", "守口市", "門真市", "四條畷市", "大東市", 
-    "東大阪市", "八尾市", "柏原市", "和泉市", "高石市", "泉大津市", "忠岡町", "岸和田市", "貝塚市", 
-    "熊取町", "泉佐野市", "田尻町", "泉南市", "阪南市", "岬町", "松原市", "羽曳野市", "藤井寺市", 
-    "太子町", "河南町", "千早赤阪村", "富田林市", "河内長野市", "大阪狭山市"
-];
+// Get region-specific data
+const regionData = regionAreaData[regionName];
+
+if (!regionData) {
+  console.warn(`No area data found for region: ${regionName}`);
+}
+
+// Flatten all cities from all area groups
+const allCities: string[] = [];
+if (regionData) {
+  regionData.areas.forEach(areaGroup => {
+    allCities.push(...areaGroup.cities);
+  });
+}
 ---
 
 <section class="py-10 bg-gray-50 border-y border-gray-100">
     <div class="container mx-auto px-8">
         <div class="max-w-4xl mx-auto">
             <h2 class="text-2xl md:text-3xl font-bold text-center text-gray-800 mb-8">
-                {regionName}の出張対応エリア
+                {regionData?.headline || `${regionName}の出張対応エリア`}
             </h2>
             <p class="text-gray-600 text-center mb-8">
-                お電話一本で、ご自宅やご指定の場所までプロの機材を積んで伺います。<br />
-                電源不要、水道不要（タンク持参）ですので、駐車場があればどこでも作業可能です。
+                {regionData?.reassurance || 'お電話一本で、ご自宅やご指定の場所までプロの機材を積んで伺います。電源不要、水道不要（タンク持参）ですので、駐車場があればどこでも作業可能です。'}
             </p>
             
             <div class="bg-white p-6 md:p-10 rounded-3xl shadow-sm border border-gray-100">
-                <div class="flex flex-wrap justify-center gap-2 md:gap-3">
-                    {areas.map((area) => (
-                        <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium border border-gray-100">
-                            {area}
-                        </span>
+                <div class="space-y-6">
+                    {regionData && regionData.areas.map((areaGroup) => (
+                        <div>
+                            <h3 class="text-lg font-bold text-gray-800 mb-3 pb-2 border-b border-gray-200">
+                                {areaGroup.label}
+                            </h3>
+                            <div class="flex flex-wrap gap-2">
+                                {areaGroup.cities.map((city) => (
+                                    <span class="bg-gray-50 text-gray-700 px-4 py-2 rounded-lg text-sm font-medium border border-gray-100">
+                                        {city}
+                                    </span>
+                                ))}
+                            </div>
+                        </div>
                     ))}
-                    <span class="bg-primary/10 text-primary px-4 py-2 rounded-lg text-sm font-bold border border-primary/20">
-                        ...その他近隣地域も相談可
-                    </span>
                 </div>
                 <div class="mt-8 pt-8 border-t border-gray-100 text-center">
                     <p class="text-sm text-gray-500 italic">
